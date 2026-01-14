@@ -1,0 +1,7 @@
+query PersonNote($input: PersonNoteInput!) {
+  personNote(input: $input) {
+    _id
+    content
+    createdAt
+  }
+}

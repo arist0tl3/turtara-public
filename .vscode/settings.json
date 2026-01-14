@@ -1,0 +1,19 @@
+{
+  "cSpell.words": ["customfield", "resolutiondate", "styleseat", "tiptap"],
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#3ed1c2",
+    "titleBar.activeForeground": "#000000",
+    "titleBar.inactiveBackground": "#3ed1c2",
+    "titleBar.inactiveForeground": "#000000",
+    "titleBar.border": "#3ed1c2",
+    "activityBar.background": "#3ed1c2",
+    "activityBar.foreground": "#000000",
+    "statusBar.background": "#3ed1c2",
+    "statusBar.foreground": "#000000",
+    "statusBar.debuggingBackground": "#3ed1c2",
+    "statusBar.debuggingForeground": "#000000",
+    "tab.activeBorder": "#3ed1c2",
+    "iLoveWorkSpaceColors": true,
+    "iLoveWorkSpaceRandom": false
+  }
+}

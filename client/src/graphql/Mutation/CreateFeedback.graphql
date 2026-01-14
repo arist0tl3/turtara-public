@@ -1,0 +1,11 @@
+mutation CreateFeedback($input: CreateFeedbackInput!) {
+  createFeedback(input: $input) {
+    error
+    feedback {
+      _id
+      content
+      type
+    }
+    success
+  }
+}

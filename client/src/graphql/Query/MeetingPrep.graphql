@@ -1,0 +1,6 @@
+query MeetingPrep($input: MeetingPrepInput!) {
+  meetingPrep(input: $input) {
+    _id
+    topics
+  }
+}

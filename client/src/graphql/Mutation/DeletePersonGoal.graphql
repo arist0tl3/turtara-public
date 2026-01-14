@@ -1,0 +1,6 @@
+mutation DeletePersonGoal($input: DeletePersonGoalInput!) {
+  deletePersonGoal(input: $input) {
+    error
+    success
+  }
+}

@@ -1,0 +1,16 @@
+mutation CreateCheckIn($input: CreateCheckInInput!) {
+  createCheckIn(input: $input) {
+    error
+    checkIn {
+      _id
+      createdAt
+      weeklyConfidence
+      weeklyConfidenceReason
+      weeklyGoal
+      meetingRequested
+      meetingRequestedReasons
+      personId
+    }
+    success
+  }
+}

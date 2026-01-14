@@ -1,0 +1,11 @@
+query Dashboard {
+  dashboard {
+    outstandingMeetingReports {
+      _id
+      firstName
+      lastName
+      profileImageSrc
+      lastMeetingDate
+    }
+  }
+}

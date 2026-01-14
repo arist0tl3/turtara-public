@@ -1,0 +1,6 @@
+query GetSprints {
+  getSprints {
+    success
+    error
+  }
+}

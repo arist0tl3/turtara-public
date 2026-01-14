@@ -1,0 +1,6 @@
+mutation DeleteFeedback($input: DeleteFeedbackInput!) {
+  deleteFeedback(input: $input) {
+    error
+    success
+  }
+}

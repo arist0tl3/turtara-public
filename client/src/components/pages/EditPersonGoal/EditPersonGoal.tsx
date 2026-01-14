@@ -1,0 +1,102 @@
+import { FormEvent, useState } from 'react';
+import { ReactElement } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Input, FormControl, FormLabel } from '@mui/joy';
+import styled from 'styled-components';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import moment, { Moment } from 'moment';
+
+import { usePersonGoalQuery, useUpdatePersonGoalMutation } from '../../../generated';
+
+const Form = styled.form`
+  width: 640px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    margin-bottom: 16px;
+  }
+`;
+
+function EditPersonGoal(): ReactElement {
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const { personId = '', personGoalId = '' } = params;
+
+  const [content, setContent] = useState<string>('');
+  const [targetDate, setTargetDate] = useState<Moment>(moment(new Date()));
+
+  const { error, loading } = usePersonGoalQuery({
+    onCompleted: (data) => {
+      if (data?.personGoal?.content) {
+        setContent(data.personGoal.content);
+      }
+    },
+    variables: {
+      input: {
+        personGoalId,
+      },
+    },
+  });
+
+  const [updatePersonGoal] = useUpdatePersonGoalMutation({
+    onCompleted: (data) => {
+      if (data.updatePersonGoal.personGoal?._id) {
+        navigate(`/people/${personId}`, {
+          replace: true,
+        });
+      }
+    },
+    variables: {
+      input: {
+        content,
+        personGoalId,
+        targetDate,
+      },
+    },
+  });
+
+  const readyToSubmit = !!content;
+
+  const handleFormSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    if (readyToSubmit) {
+      updatePersonGoal();
+    }
+  };
+
+  const handleTargetDateChange = (date: Moment | null): void => {
+    if (!!date) {
+      setTargetDate(date);
+    }
+  };
+
+  if (error) return <div>{`Error: ${error}`}</div>;
+  if (loading) return <div />;
+
+  return (
+    <div>
+      <h1>{'Edit Person Goal'}</h1>
+      <Form onSubmit={handleFormSubmit}>
+        <FormControl>
+          <FormLabel>{'Goal'}</FormLabel>
+          <Input value={content} onChange={(e) => setContent(e.currentTarget.value)} />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>{'Target date'}</FormLabel>
+          <DatePicker value={targetDate} label={'Choose a target date'} onChange={handleTargetDateChange} />
+        </FormControl>
+
+        <Button disabled={!readyToSubmit} type={'submit'}>
+          {'Submit'}
+        </Button>
+      </Form>
+    </div>
+  );
+}
+
+export default EditPersonGoal;

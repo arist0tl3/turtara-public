@@ -1,0 +1,17 @@
+fragment IssueParts on Issue {
+  id
+  key
+  self
+
+  assigneeName
+  cycleTime
+  cycleTimePerPoint
+  endedAt
+  personId
+  startedAt
+  storyPoints
+  timesInColumns {
+    columnName
+    elapsedTime
+  }
+}

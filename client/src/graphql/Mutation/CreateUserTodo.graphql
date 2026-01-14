@@ -1,0 +1,12 @@
+mutation CreateUserTodo($input: CreateUserTodoInput!) {
+  createUserTodo(input: $input) {
+    success
+    error
+    todo {
+      _id
+      content
+      createdAt
+      completedAt
+    }
+  }
+}

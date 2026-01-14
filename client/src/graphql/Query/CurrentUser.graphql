@@ -1,0 +1,25 @@
+query CurrentUser {
+  currentUser {
+    _id
+    phoneNumber
+    jiraEmail
+    jiraHost
+    hasJiraToken
+    hasGithubToken
+    githubOrganization
+    jiraColumnGroups {
+      _id
+      name
+    }
+    jiraColumns {
+      _id
+      name
+      jiraColumnGroup {
+        _id
+        name
+      }
+      first
+      last
+    }
+  }
+}

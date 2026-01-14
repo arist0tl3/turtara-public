@@ -1,0 +1,8 @@
+query UserTodosByCurrentUser {
+  userTodosByCurrentUser {
+    _id
+    content
+    createdAt
+    completedAt
+  }
+}

@@ -1,0 +1,37 @@
+query PeopleByCurrentUser {
+  peopleByCurrentUser {
+    _id
+    firstName
+    githubData {
+      githubScore {
+        total
+        author
+        reviewer
+        prCount
+        authorCount
+        reviewerCount
+        meaningfulReviewRatio
+        balanceMultiplier
+        prScores {
+          id
+          score
+          role
+        }
+        totalDelta
+        authorDelta
+        reviewerDelta
+      }
+    }
+    lastName
+    profileImageSrc
+    reportsToMe
+    role {
+      _id
+      name
+    }
+    team {
+      _id
+      name
+    }
+  }
+}

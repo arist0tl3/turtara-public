@@ -1,0 +1,6 @@
+mutation DeletePersonNote($input: DeletePersonNoteInput!) {
+  deletePersonNote(input: $input) {
+    error
+    success
+  }
+}

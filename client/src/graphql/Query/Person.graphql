@@ -1,0 +1,90 @@
+query Person($input: PersonInput!) {
+  person(input: $input) {
+    _id
+    firstName
+    checkIns {
+      _id
+      createdAt
+      weeklyConfidence
+      weeklyConfidenceReason
+      weeklyGoal
+      meetingRequested
+      meetingRequestedReasons
+    }
+    currentIssues {
+      ...IssueParts
+    }
+    feedback {
+      _id
+      content
+      createdAt
+      type
+    }
+    githubHandle
+    kids
+    lastName
+    partners
+    pastIssues {
+      ...IssueParts
+    }
+    pets
+    profileImageSrc
+    personGoals {
+      _id
+      content
+      createdAt
+      targetDate
+    }
+    personNotes {
+      _id
+      content
+      createdAt
+    }
+    githubData {
+      pullRequests {
+        _id
+        githubId
+        role
+        additions
+        deletions
+        createdAt
+        mergedAt
+        permalink
+        reviewCommentCount
+        repository {
+          id
+          name
+          url
+        }
+        title
+      }
+      githubScore {
+        total
+        author
+        reviewer
+        prCount
+        authorCount
+        reviewerCount
+        meaningfulReviewRatio
+        balanceMultiplier
+        prScores {
+          id
+          score
+          role
+        }
+        totalDelta
+        authorDelta
+        reviewerDelta
+      }
+    }
+    reportsToMe
+    role {
+      _id
+      name
+    }
+    team {
+      _id
+      name
+    }
+  }
+}

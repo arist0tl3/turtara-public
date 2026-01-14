@@ -1,0 +1,24 @@
+mutation UpdatePerson($input: UpdatePersonInput!) {
+  updatePerson(input: $input) {
+    error
+    person {
+      _id
+      firstName
+      lastName
+      kids
+      pets
+      partners
+      profileImageSrc
+      reportsToMe
+      role {
+        _id
+        name
+      }
+      team {
+        _id
+        name
+      }
+    }
+    success
+  }
+}

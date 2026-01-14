@@ -1,0 +1,8 @@
+query Feedback($input: FeedbackInput!) {
+  feedback(input: $input) {
+    _id
+    content
+    createdAt
+    type
+  }
+}

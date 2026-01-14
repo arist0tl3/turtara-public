@@ -1,0 +1,6 @@
+mutation DeleteCheckIn($input: DeleteCheckInInput!) {
+  deleteCheckIn(input: $input) {
+    error
+    success
+  }
+}

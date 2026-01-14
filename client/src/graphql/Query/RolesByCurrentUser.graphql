@@ -1,0 +1,6 @@
+query RolesByCurrentUser {
+  rolesByCurrentUser {
+    _id
+    name
+  }
+}

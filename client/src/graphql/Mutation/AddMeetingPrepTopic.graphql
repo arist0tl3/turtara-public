@@ -1,0 +1,10 @@
+mutation AddMeetingPrepTopic($input: AddMeetingPrepTopicInput!) {
+  addMeetingPrepTopic(input: $input) {
+    error
+    meetingPrep {
+      _id
+      topics
+    }
+    success
+  }
+}

@@ -1,0 +1,25 @@
+query RecentTeamInsight($input: RecentTeamInsightInput!) {
+  recentTeamInsight(input: $input) {
+    teamLevelReport {
+      sprintId
+      score
+      summary
+    }
+    individualLevelReport {
+      personId
+      person {
+        _id
+        firstName
+        lastName
+      }
+      score
+      summary
+    }
+    issueAnomaliesReport {
+      issueId
+      severity
+      summary
+    }
+    observationsReport
+  }
+}

@@ -1,0 +1,8 @@
+query PersonGoal($input: PersonGoalInput!) {
+  personGoal(input: $input) {
+    _id
+    content
+    createdAt
+    targetDate
+  }
+}

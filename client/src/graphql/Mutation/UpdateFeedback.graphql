@@ -1,0 +1,11 @@
+mutation UpdateFeedback($input: UpdateFeedbackInput!) {
+  updateFeedback(input: $input) {
+    error
+    feedback {
+      _id
+      content
+      type
+    }
+    success
+  }
+}

@@ -1,0 +1,11 @@
+mutation CreatePersonGoal($input: CreatePersonGoalInput!) {
+  createPersonGoal(input: $input) {
+    error
+    personGoal {
+      _id
+      content
+      targetDate
+    }
+    success
+  }
+}

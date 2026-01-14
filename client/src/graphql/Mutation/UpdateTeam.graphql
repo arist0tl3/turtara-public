@@ -1,0 +1,10 @@
+mutation UpdateTeam($input: UpdateTeamInput!) {
+  updateTeam(input: $input) {
+    error
+    team {
+      _id
+      name
+    }
+    success
+  }
+}

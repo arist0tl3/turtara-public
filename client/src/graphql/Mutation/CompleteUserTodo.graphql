@@ -1,0 +1,10 @@
+mutation CompleteUserTodo($input: CompleteUserTodoInput!) {
+  completeUserTodo(input: $input) {
+    success
+    error
+    todo {
+      _id
+      completedAt
+    }
+  }
+}

@@ -1,0 +1,10 @@
+mutation CreatePersonNote($input: CreatePersonNoteInput!) {
+  createPersonNote(input: $input) {
+    error
+    personNote {
+      _id
+      content
+    }
+    success
+  }
+}

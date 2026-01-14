@@ -1,0 +1,10 @@
+mutation UpdatePersonNote($input: UpdatePersonNoteInput!) {
+  updatePersonNote(input: $input) {
+    error
+    personNote {
+      _id
+      content
+    }
+    success
+  }
+}
