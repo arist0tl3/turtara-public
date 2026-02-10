@@ -1,4 +1,4 @@
-# People Manager
+# Engineering Manager Dashboard
 
 People Manager is a full-stack web app for engineering managers to track people, teams, one-on-ones, goals, feedback, and operational signals from GitHub and Jira.
 
