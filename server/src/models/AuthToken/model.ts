@@ -2,7 +2,11 @@ import { Schema, model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'; // Use environment variable in production
+const { JWT_SECRET } = process.env;
+
+if (!JWT_SECRET) {
+  throw new Error('Missing JWT_SECRET environment variable');
+}
 
 export interface IAuthToken {
   _id: string;

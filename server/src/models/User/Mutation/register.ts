@@ -31,8 +31,6 @@ async function register(_: any, { input }: { input: RegisterInput }, context: an
     // Create auth token
     const token = await createAuthToken(user._id);
 
-    console.log('token', token);
-
     return {
       success: true,
       token,

@@ -12,8 +12,6 @@ const { VITE_GRAPHQL_ENDPOINT } = import.meta.env;
 const link = new HttpLink({ uri: VITE_GRAPHQL_ENDPOINT });
 
 const setAuthorizationLink = setContext((request, previousContext) => {
-  console.log(localStorage.getItem('auth_token'));
-
   return {
     headers: {
       ...previousContext.headers,
