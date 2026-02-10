@@ -1,59 +1,107 @@
 # Engineering Manager Dashboard
 
-Internal tools I built to help me manage 12 engineers across two teams when existing tools weren't cutting it.
+People Manager is a full-stack web app for engineering managers to track people, teams, one-on-ones, goals, feedback, and operational signals from GitHub and Jira.
 
-## The Problem
+## Stack
+- Client: React 18, TypeScript, Vite, Apollo Client, MUI Joy/Material
+- Server: Node.js, TypeScript, Apollo Server, Express middleware, Mongoose
+- Data: MongoDB
+- Integrations: GitHub GraphQL, Jira API, Anthropic/OpenAI-backed team insight generation
 
-As an Engineering Manager at StyleSeat, I needed better visibility into:
-- Individual and team performance metrics
-- Cycle time breakdowns to identify bottlenecks
-- Team health signals beyond standup updates
-- 1:1 preparation and follow-up tracking
-- Sprint velocity and capacity planning
+## Repository Structure
+- `client/`: frontend app
+- `server/`: GraphQL API and domain logic
+- `AGENTS.md`: contributor and coding-agent guardrails
+- `TODOS.md`: prioritized backlog
 
-Existing tools (Jira, Lattice, etc.) gave me data, but not the insights I actually needed to be an effective manager.
+## Prerequisites
+- Node.js `23.x` (required by `server/package.json` engines)
+- npm `10+`
+- MongoDB instance (local or remote)
 
-## The Solution
+## Environment Variables
 
-Built a lightweight dashboard that aggregates data from multiple sources and surfaces the metrics that actually matter for team health and productivity.
+### Server (`server/.env`)
+- `MONGO_URI`: MongoDB connection string
+- `JWT_SECRET`: secret used for auth token signing/verification (required)
+- `PORT`: API port (optional, defaults to `4000`)
+- `NODE_ENV`: `development` or `production` (optional)
+- `CLAUDE_API_KEY`: Anthropic key for team insight generation (required for that feature)
+- `OPENAI_API_KEY`: OpenAI key if enabling OpenAI-based paths
 
-## Features
+### Client (`client/.env.development`)
+- `VITE_GRAPHQL_ENDPOINT`: GraphQL endpoint URL (example: `http://localhost:4000/`)
 
-- **Cycle Time Analysis**: Visualize where work gets stuck (code review, QA, deployment)
-- **Team Health Tracking**: Monitor engagement, workload balance, and potential burnout signals
-- **1:1 Management**: Prep tracking, action items, and follow-up reminders
-- **Performance Patterns**: Identify trends in individual and team output
-- **Sprint Analytics**: Velocity tracking, capacity planning, and commitment accuracy
+## Local Setup
+1. Install server dependencies:
+```bash
+cd server
+npm install
+```
+2. Create server env file:
+```bash
+cp .env.sample .env
+```
+3. Start API in dev mode:
+```bash
+npm run start-dev
+```
+4. In a second terminal, install client dependencies:
+```bash
+cd client
+npm install
+```
+5. Ensure `client/.env.development` has the correct API URL.
+6. Start client:
+```bash
+npm run dev
+```
 
-## Tech Stack
+Default local URLs:
+- Client: `http://localhost:5173`
+- API: `http://localhost:4000/`
 
-- React / TypeScript
-- Node.js backend
-- MongoDB
-- Jira/Github Integrations
+## Key Scripts
 
-## Note on Repository
+### Client (`client/package.json`)
+- `npm run dev`: start Vite dev server
+- `npm run build`: production build
+- `npm run lint`: eslint
+- `npm run generate`: GraphQL codegen and copy generated server types
 
-This is a clean copy of tools I built and used internally 2023-2025. The original repository contained employee names and performance data in early commits, so I've published a fresh copy with just the current codebase to protect privacy.
+### Server (`server/package.json`)
+- `npm run start-dev`: start via nodemon + ts runtime
+- `npm run start-dev:force`: ts runtime without type checks
+- `npm run build`: compile TypeScript to `dist/`
+- `npm run start`: run compiled output
 
-The lack of commit history doesn't reflect the iterative development - this tool evolved significantly over 2+ years based on what I learned managing teams.
+## GraphQL Codegen Workflow
+When GraphQL operations or schema types change:
+1. Update operation files under `client/src/graphql/**`.
+2. Run:
+```bash
+cd client
+npm run generate
+```
+3. Commit generated updates in:
+- `client/src/generated.ts`
+- `server/src/generated.ts`
 
-## Impact
+## Current Project Status
+- Core CRUD for people, teams, roles, notes, goals, check-ins, and feedback exists.
+- Dashboard and reporting flows are implemented.
+- Integrations for GitHub/Jira and AI insights are present but need better operational documentation.
+- Root documentation and test coverage are still early-stage and being improved.
 
-Used this daily for 2+ years while managing engineering teams. Helped me:
-- Identify bottlenecks early (avg 30% reduction in cycle time)
-- Have more productive 1:1s (data-informed conversations)
-- Spot team health issues before they became problems
-- Make better resourcing decisions during reorgs
+## Security Notes
+- `JWT_SECRET` is required and should be high-entropy in every environment.
+- Never log bearer tokens or auth headers.
+- Keep API tokens in environment variables only.
 
-## Status
-
-Built iteratively 2023-2025 as my management needs evolved. Works great for my use case. Not production-ready for others (single-user assumptions, basic auth, etc.).
-
-## Why I'm Sharing This
-
-Building this taught me something important: I'm much more energized by building tools than by the meetings and process that come with management. That realization is why I'm now looking for product engineer roles where I can be closer to shipping features.
-
----
-
-Built by [@arist0tl3](https://github.com/arist0tl3)
+## Near-Term Priorities
+See `TODOS.md` for prioritized work, including:
+- My Reports
+- Autosave notes
+- Subjects
+- Baseline test coverage and CI
+- Additional security and reliability hardening
