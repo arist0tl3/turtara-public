@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, FormControl, FormLabel, Input, Typography, Link, Card, Divider } from '@mui/joy';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useApolloClient, useMutation } from '@apollo/client';
 import { useTheme } from '../../../theme/ThemeProvider';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -18,22 +18,15 @@ const LOGIN_MUTATION = gql`
 
 export default function Login() {
   const navigate = useNavigate();
+  const apolloClient = useApolloClient();
   const { theme } = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const [login] = useMutation(LOGIN_MUTATION, {
-    refetchQueries: ['CurrentUser'],
     onError: (error) => {
       setError(error.message);
-    },
-    update: (cache, { data }) => {
-      if (data.login.success) {
-        localStorage.setItem('auth_token', data.login.token);
-      } else {
-        setError(data.login.error || 'An error occurred');
-      }
     },
   });
 
@@ -41,7 +34,7 @@ export default function Login() {
     e.preventDefault();
     setError('');
 
-    await login({
+    const { data } = await login({
       variables: {
         input: {
           email,
@@ -49,6 +42,14 @@ export default function Login() {
         },
       },
     });
+
+    if (data?.login?.success && data.login.token) {
+      localStorage.setItem('auth_token', data.login.token);
+      await apolloClient.refetchQueries({ include: ['CurrentUser'] });
+      return;
+    }
+
+    setError(data?.login?.error || 'An error occurred');
   };
 
   return (

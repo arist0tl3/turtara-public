@@ -84,4 +84,4 @@ textarea:not([rows]) {
 }
 
 /* Hide scroll bars */
-body::-webkit-scrollbar, *::-webkit-scrollbar { display: none; };
+body::-webkit-scrollbar, *::-webkit-scrollbar { display: none; }
