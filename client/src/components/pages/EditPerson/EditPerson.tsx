@@ -129,6 +129,15 @@ function EditPerson({ onSuccess }: EditPersonProps) {
     setRoleId(selectedRoleId || '');
   };
 
+  const textFields = [
+    { name: 'firstName', label: 'First Name', value: firstName, onChange: setFirstName },
+    { name: 'lastName', label: 'Last Name', value: lastName, onChange: setLastName },
+    { name: 'githubHandle', label: 'Github Handle', value: githubHandle, onChange: setGithubHandle },
+    { name: 'partners', label: 'Partners', value: partners, onChange: setPartners },
+    { name: 'kids', label: 'Kids', value: kids, onChange: setKids },
+    { name: 'pets', label: 'Pets', value: pets, onChange: setPets },
+  ];
+
   if (error || teamsError || rolesError) return <div>{`Error: ${error}`}</div>;
   if (loading || teamsLoading || rolesLoading) return <div />;
 
@@ -256,14 +265,12 @@ function EditPerson({ onSuccess }: EditPersonProps) {
           />
         </FormControl>
 
-        {['firstName', 'lastName', 'githubHandle', 'partners', 'kids', 'pets'].map((field) => (
-          <FormControl key={field} sx={{ mb: 2 }}>
-            <FormLabel sx={{ color: theme.text.primary }}>
-              {field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}
-            </FormLabel>
+        {textFields.map((field) => (
+          <FormControl key={field.name} sx={{ mb: 2 }}>
+            <FormLabel sx={{ color: theme.text.primary }}>{field.label}</FormLabel>
             <Input
-              value={eval(field)}
-              onChange={(e) => eval(`set${field.charAt(0).toUpperCase() + field.slice(1)}`)(e.target.value)}
+              value={field.value}
+              onChange={(e) => field.onChange(e.target.value)}
               sx={{
                 color: theme.text.primary,
                 bgcolor: theme.colors.inputBackground,
