@@ -8,7 +8,7 @@ async function updateCurrentUser(
   context: IContext,
 ): Promise<UpdateCurrentUserResponse> {
   try {
-    const { email, jiraHost, jiraEmail, jiraToken, githubToken, githubOrganization } = args.input;
+    const { email, phoneNumber } = args.input;
 
     if (!context.currentUser?._id) {
       throw new Error('User not found');
@@ -16,18 +16,8 @@ async function updateCurrentUser(
 
     const update = {
       email,
-      jiraHost,
-      jiraEmail,
-      githubOrganization,
-    } as any;
-
-    if (jiraToken && jiraToken !== '****') {
-      update.jiraToken = jiraToken;
-    }
-
-    if (githubToken && githubToken !== '****') {
-      update.githubToken = githubToken;
-    }
+      phoneNumber,
+    };
 
     const currentUser = await context.models.User.findOneAndUpdate({ _id: context.currentUser._id }, update, { new: true });
 

@@ -154,13 +154,6 @@ export type CurrentUser = {
   _id: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
-  githubOrganization?: Maybe<Scalars['String']>;
-  hasGithubToken?: Maybe<Scalars['Boolean']>;
-  hasJiraToken?: Maybe<Scalars['Boolean']>;
-  jiraColumnGroups?: Maybe<Array<Maybe<JiraColumnGroup>>>;
-  jiraColumns?: Maybe<Array<Maybe<JiraColumn>>>;
-  jiraEmail?: Maybe<Scalars['String']>;
-  jiraHost?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
 };
 
@@ -249,33 +242,6 @@ export type Feedback = {
 
 export type FeedbackInput = {
   feedbackId: Scalars['String'];
-};
-
-export type JiraColumn = {
-  __typename?: 'JiraColumn';
-  _id: Scalars['String'];
-  first?: Maybe<Scalars['Boolean']>;
-  jiraColumnGroup?: Maybe<JiraColumnGroup>;
-  jiraColumnGroupId?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Boolean']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-export type JiraColumnGroup = {
-  __typename?: 'JiraColumnGroup';
-  _id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-};
-
-export type JiraColumnGroupInput = {
-  name: Scalars['String'];
-};
-
-export type JiraColumnInput = {
-  first?: InputMaybe<Scalars['Boolean']>;
-  jiraColumnGroupId?: InputMaybe<Scalars['String']>;
-  last?: InputMaybe<Scalars['Boolean']>;
-  name: Scalars['String'];
 };
 
 export type LoginInput = {
@@ -616,12 +582,7 @@ export type UncompleteUserTodoResponse = {
 
 export type UpdateCurrentUserInput = {
   email?: InputMaybe<Scalars['String']>;
-  githubOrganization?: InputMaybe<Scalars['String']>;
-  githubToken?: InputMaybe<Scalars['String']>;
-  jiraEmail?: InputMaybe<Scalars['String']>;
-  jiraHost?: InputMaybe<Scalars['String']>;
-  jiraToken?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
+  phoneNumber?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateCurrentUserResponse = {
@@ -898,7 +859,7 @@ export type UpdateTeamMutation = { __typename?: 'Mutation', updateTeam: { __type
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { __typename?: 'Query', currentUser?: { __typename?: 'CurrentUser', _id: string, phoneNumber?: string | null, jiraEmail?: string | null, jiraHost?: string | null, hasJiraToken?: boolean | null, hasGithubToken?: boolean | null, githubOrganization?: string | null, jiraColumnGroups?: Array<{ __typename?: 'JiraColumnGroup', _id: string, name?: string | null } | null> | null, jiraColumns?: Array<{ __typename?: 'JiraColumn', _id: string, name?: string | null, first?: boolean | null, last?: boolean | null, jiraColumnGroup?: { __typename?: 'JiraColumnGroup', _id: string, name?: string | null } | null } | null> | null } | null };
+export type CurrentUserQuery = { __typename?: 'Query', currentUser?: { __typename?: 'CurrentUser', _id: string, email?: string | null, phoneNumber?: string | null } | null };
 
 export type DashboardQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1910,26 +1871,8 @@ export const CurrentUserDocument = gql`
     query CurrentUser {
   currentUser {
     _id
+    email
     phoneNumber
-    jiraEmail
-    jiraHost
-    hasJiraToken
-    hasGithubToken
-    githubOrganization
-    jiraColumnGroups {
-      _id
-      name
-    }
-    jiraColumns {
-      _id
-      name
-      jiraColumnGroup {
-        _id
-        name
-      }
-      first
-      last
-    }
   }
 }
     `;

@@ -28,53 +28,16 @@ const typeDefs = gql`
     error: String
   }
 
-  type JiraColumnGroup {
-    _id: String!
-    name: String
-  }
-
-  type JiraColumn {
-    _id: String!
-    name: String
-    jiraColumnGroupId: String
-    jiraColumnGroup: JiraColumnGroup
-    first: Boolean
-    last: Boolean
-  }
-
   type CurrentUser {
     _id: String!
     createdAt: DateTime
     email: String
     phoneNumber: String
-    jiraHost: String
-    jiraEmail: String
-    hasJiraToken: Boolean
-    hasGithubToken: Boolean
-    githubOrganization: String
-    jiraColumnGroups: [JiraColumnGroup]
-    jiraColumns: [JiraColumn]
-  }
-
-  input JiraColumnGroupInput {
-    name: String!
-  }
-
-  input JiraColumnInput {
-    name: String!
-    jiraColumnGroupId: String
-    first: Boolean
-    last: Boolean
   }
 
   input UpdateCurrentUserInput {
     email: String
-    password: String
-    jiraHost: String
-    jiraEmail: String
-    jiraToken: String
-    githubToken: String
-    githubOrganization: String
+    phoneNumber: String
   }
 
   type UpdateCurrentUserResponse {
