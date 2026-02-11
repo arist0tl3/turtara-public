@@ -95,17 +95,11 @@ const typeDefs = gql`
     outstandingMeetingReports: [OutstandingMeetingReport!]!
   }
 
-  type UpdateGithubDataResponse {
-    success: Boolean!
-    error: String
-  }
-
   extend type Mutation {
     login(input: LoginInput!): LoginResponse!
     register(input: RegisterInput!): RegisterResponse!
     updateCurrentUser(input: UpdateCurrentUserInput!): UpdateCurrentUserResponse!
     logout: LogoutResponse!
-    updateGithubData: UpdateGithubDataResponse!
   }
 
   extend type Query {

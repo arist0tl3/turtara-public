@@ -18,14 +18,6 @@ async function createPersonNote(
       personId: args.input.personId,
     });
 
-    // Clear any meeting preps that are older than this note
-    await context.models.MeetingPrep.deleteMany({
-      createdAt: {
-        $lt: personNote.createdAt,
-      },
-      personId: args.input.personId,
-    });
-
     return {
       personNote,
       success: true,
