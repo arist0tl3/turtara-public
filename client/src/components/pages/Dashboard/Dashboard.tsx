@@ -2,7 +2,6 @@ import { Box, Grid, Typography } from '@mui/joy';
 import { useTheme } from '../../../theme/ThemeProvider';
 import { useDashboardQuery } from '../../../generated';
 import TodoList from './TodoList';
-import GithubScoresChart from './GithubScoresChart';
 import OutstandingMeetingReports from './OutstandingMeetingReports';
 
 export default function Dashboard() {
@@ -41,21 +40,7 @@ export default function Dashboard() {
       </Typography>
 
       <Grid container spacing={2} sx={{ mb: 4 }}>
-        <Grid xs={12} md={8}>
-          <Box
-            sx={{
-              height: '100%',
-              bgcolor: theme.dashboard.itemBackground,
-              borderRadius: 'sm',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-              p: 2,
-            }}
-          >
-            <GithubScoresChart />
-          </Box>
-        </Grid>
-
-        <Grid xs={12} md={4}>
+        <Grid xs={12} md={6}>
           <Box
             sx={{
               height: '100%',
@@ -71,7 +56,7 @@ export default function Dashboard() {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid xs={12} md={4}>
+        <Grid xs={12} md={6}>
           <Box
             sx={{
               height: '100%',

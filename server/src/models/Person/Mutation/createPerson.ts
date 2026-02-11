@@ -14,7 +14,6 @@ async function createPerson(parent: undefined, args: MutationCreatePersonArgs, c
       createdById: userId,
       teamId: args.input.teamId,
       roleId: args.input.roleId,
-      githubHandle: args.input.githubHandle,
       reportsToMe: args.input.reportsToMe || false,
     });
 

@@ -1,5 +1,4 @@
 import DataLoader from 'dataloader';
-import { graphql } from '@octokit/graphql';
 import type NodeCache from 'node-cache';
 import { Request, Response } from 'express';
 
@@ -23,5 +22,4 @@ export interface IContext {
   currentUser?: IUser | null;
   cache: NodeCache;
   dataLoaders: IDataloaders;
-  githubClient?: typeof graphql;
 }

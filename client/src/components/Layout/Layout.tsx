@@ -35,7 +35,6 @@ import formatName from '../../utils/formatName';
 import Avatar from '../Avatar';
 import { useTheme } from '../../theme/ThemeProvider';
 import { AccountCircle } from '@mui/icons-material';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
 const SIDEBAR_WIDTH = 220;
 
@@ -375,25 +374,6 @@ const Layout = () => {
                     </ListItemButton>
                   </ListItem>
 
-                  <ListItem>
-                    <ListItemButton
-                      component={Link}
-                      to="/config"
-                      sx={{
-                        borderRadius: 'sm',
-                        color: theme.sidebar.itemColor,
-                        '&:hover': {
-                          bgcolor: theme.sidebar.hoverBackground,
-                        },
-                      }}
-                      onClick={handleLinkClick}
-                    >
-                      <ListItemDecorator sx={{ color: 'inherit' }}>
-                        <SettingsOutlinedIcon />
-                      </ListItemDecorator>
-                      <ListItemContent>Config</ListItemContent>
-                    </ListItemButton>
-                  </ListItem>
                 </Box>
               </List>
             </>

@@ -14,20 +14,6 @@ export type Scalars = {
   Int: number;
   Float: number;
   DateTime: any;
-  _Any: any;
-  _FieldSet: any;
-};
-
-export type AddMeetingPrepTopicInput = {
-  personId: Scalars['String'];
-  topic: Scalars['String'];
-};
-
-export type AddMeetingPrepTopicResponse = {
-  __typename?: 'AddMeetingPrepTopicResponse';
-  error?: Maybe<Scalars['String']>;
-  meetingPrep?: Maybe<MeetingPrep>;
-  success: Scalars['Boolean'];
 };
 
 export type CheckIn = {
@@ -105,7 +91,6 @@ export type CreatePersonGoalResponse = {
 
 export type CreatePersonInput = {
   firstName: Scalars['String'];
-  githubHandle?: InputMaybe<Scalars['String']>;
   lastName: Scalars['String'];
   reportsToMe?: InputMaybe<Scalars['Boolean']>;
   roleId?: InputMaybe<Scalars['ID']>;
@@ -169,13 +154,6 @@ export type CurrentUser = {
   _id: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
-  githubOrganization?: Maybe<Scalars['String']>;
-  hasGithubToken?: Maybe<Scalars['Boolean']>;
-  hasJiraToken?: Maybe<Scalars['Boolean']>;
-  jiraColumnGroups?: Maybe<Array<Maybe<JiraColumnGroup>>>;
-  jiraColumns?: Maybe<Array<Maybe<JiraColumn>>>;
-  jiraEmail?: Maybe<Scalars['String']>;
-  jiraHost?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
 };
 
@@ -266,88 +244,6 @@ export type FeedbackInput = {
   feedbackId: Scalars['String'];
 };
 
-export type GenerateTeamInsightInput = {
-  teamId: Scalars['String'];
-};
-
-export type GenerateTeamInsightResponse = {
-  __typename?: 'GenerateTeamInsightResponse';
-  error?: Maybe<Scalars['String']>;
-  success: Scalars['Boolean'];
-  teamInsight?: Maybe<TeamInsight>;
-};
-
-export type GetSprintsResponse = {
-  __typename?: 'GetSprintsResponse';
-  error?: Maybe<Scalars['String']>;
-  success: Scalars['Boolean'];
-};
-
-export type GithubData = {
-  __typename?: 'GithubData';
-  githubScore?: Maybe<GithubScore>;
-  pullRequests?: Maybe<Array<PullRequest>>;
-};
-
-export type GithubScore = {
-  __typename?: 'GithubScore';
-  author?: Maybe<Scalars['Float']>;
-  authorCount?: Maybe<Scalars['Int']>;
-  authorDelta?: Maybe<Scalars['Float']>;
-  balanceMultiplier?: Maybe<Scalars['Float']>;
-  meaningfulReviewRatio?: Maybe<Scalars['Float']>;
-  prCount?: Maybe<Scalars['Int']>;
-  prScores?: Maybe<Array<PrScore>>;
-  reviewer?: Maybe<Scalars['Float']>;
-  reviewerCount?: Maybe<Scalars['Int']>;
-  reviewerDelta?: Maybe<Scalars['Float']>;
-  total?: Maybe<Scalars['Float']>;
-  totalDelta?: Maybe<Scalars['Float']>;
-};
-
-export type Issue = {
-  __typename?: 'Issue';
-  assigneeName?: Maybe<Scalars['String']>;
-  cycleTime?: Maybe<Scalars['Float']>;
-  cycleTimePerPoint?: Maybe<Scalars['Float']>;
-  endedAt?: Maybe<Scalars['DateTime']>;
-  id: Scalars['String'];
-  key: Scalars['String'];
-  personId?: Maybe<Scalars['String']>;
-  self?: Maybe<Scalars['String']>;
-  startedAt?: Maybe<Scalars['DateTime']>;
-  storyPoints?: Maybe<Scalars['Float']>;
-  summary?: Maybe<Scalars['String']>;
-  timesInColumns: Array<TimeInColumn>;
-};
-
-export type JiraColumn = {
-  __typename?: 'JiraColumn';
-  _id: Scalars['String'];
-  first?: Maybe<Scalars['Boolean']>;
-  jiraColumnGroup?: Maybe<JiraColumnGroup>;
-  jiraColumnGroupId?: Maybe<Scalars['String']>;
-  last?: Maybe<Scalars['Boolean']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-export type JiraColumnGroup = {
-  __typename?: 'JiraColumnGroup';
-  _id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-};
-
-export type JiraColumnGroupInput = {
-  name: Scalars['String'];
-};
-
-export type JiraColumnInput = {
-  first?: InputMaybe<Scalars['Boolean']>;
-  jiraColumnGroupId?: InputMaybe<Scalars['String']>;
-  last?: InputMaybe<Scalars['Boolean']>;
-  name: Scalars['String'];
-};
-
 export type LoginInput = {
   email: Scalars['String'];
   password: Scalars['String'];
@@ -366,19 +262,9 @@ export type LogoutResponse = {
   success: Scalars['Boolean'];
 };
 
-export type MeetingPrep = {
-  __typename?: 'MeetingPrep';
-  _id: Scalars['String'];
-  topics: Array<Scalars['String']>;
-};
-
-export type MeetingPrepInput = {
-  personId: Scalars['String'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  addMeetingPrepTopic?: Maybe<AddMeetingPrepTopicResponse>;
+  _empty?: Maybe<Scalars['String']>;
   completeUserTodo: CompleteUserTodoResponse;
   createCheckIn: CreateCheckInResponse;
   createFeedback: CreateFeedbackResponse;
@@ -395,24 +281,16 @@ export type Mutation = {
   deletePersonNote: DeletePersonNoteResponse;
   deleteRole: DeleteRoleResponse;
   deleteTeam: DeleteTeamResponse;
-  generateTeamInsight: GenerateTeamInsightResponse;
   login: LoginResponse;
   logout: LogoutResponse;
   register: RegisterResponse;
   uncompleteUserTodo: UncompleteUserTodoResponse;
-  updateCurrentUser: UpdateCurrentUserResponse;
   updateFeedback: UpdateFeedbackResponse;
-  updateGithubData: UpdateGithubDataResponse;
   updatePerson: UpdatePersonResponse;
   updatePersonGoal: UpdatePersonGoalResponse;
   updatePersonNote: UpdatePersonNoteResponse;
   updateRole: UpdateRoleResponse;
   updateTeam: UpdateTeamResponse;
-};
-
-
-export type MutationAddMeetingPrepTopicArgs = {
-  input: AddMeetingPrepTopicInput;
 };
 
 
@@ -496,11 +374,6 @@ export type MutationDeleteTeamArgs = {
 };
 
 
-export type MutationGenerateTeamInsightArgs = {
-  input: GenerateTeamInsightInput;
-};
-
-
 export type MutationLoginArgs = {
   input: LoginInput;
 };
@@ -513,11 +386,6 @@ export type MutationRegisterArgs = {
 
 export type MutationUncompleteUserTodoArgs = {
   input: UncompleteUserTodoInput;
-};
-
-
-export type MutationUpdateCurrentUserArgs = {
-  input: UpdateCurrentUserInput;
 };
 
 
@@ -559,26 +427,15 @@ export type OutstandingMeetingReport = {
   profileImageSrc?: Maybe<Scalars['String']>;
 };
 
-export type PrScore = {
-  __typename?: 'PRScore';
-  id: Scalars['String'];
-  role: Scalars['String'];
-  score?: Maybe<Scalars['Float']>;
-};
-
 export type Person = {
   __typename?: 'Person';
   _id: Scalars['String'];
   checkIns?: Maybe<Array<CheckIn>>;
-  currentIssues?: Maybe<Array<Issue>>;
   feedback?: Maybe<Array<Feedback>>;
   firstName: Scalars['String'];
-  githubData?: Maybe<GithubData>;
-  githubHandle?: Maybe<Scalars['String']>;
   kids?: Maybe<Scalars['String']>;
   lastName: Scalars['String'];
   partners?: Maybe<Scalars['String']>;
-  pastIssues?: Maybe<Array<Issue>>;
   personGoals?: Maybe<Array<PersonGoal>>;
   personNotes?: Maybe<Array<PersonNote>>;
   pets?: Maybe<Scalars['String']>;
@@ -617,44 +474,17 @@ export type PersonNoteInput = {
   personNoteId: Scalars['String'];
 };
 
-export type PersonPerformance = {
-  __typename?: 'PersonPerformance';
-  averageCycleTime?: Maybe<Scalars['Float']>;
-  averageCycleTimePerStoryPoint?: Maybe<Scalars['Float']>;
-  averageDevCycleTime?: Maybe<Scalars['Float']>;
-  averageDevCycleTimePerStoryPoint?: Maybe<Scalars['Float']>;
-  personId?: Maybe<Scalars['String']>;
-};
-
-export type PullRequest = {
-  __typename?: 'PullRequest';
-  _id: Scalars['String'];
-  additions?: Maybe<Scalars['Int']>;
-  createdAt: Scalars['DateTime'];
-  deletions?: Maybe<Scalars['Int']>;
-  githubId: Scalars['String'];
-  mergedAt?: Maybe<Scalars['DateTime']>;
-  permalink: Scalars['String'];
-  repository: Repository;
-  reviewCommentCount?: Maybe<Scalars['Int']>;
-  role?: Maybe<Scalars['String']>;
-  title: Scalars['String'];
-};
-
 export type Query = {
   __typename?: 'Query';
-  _service: _Service;
+  _empty?: Maybe<Scalars['String']>;
   checkIn?: Maybe<CheckIn>;
   currentUser?: Maybe<CurrentUser>;
   dashboard?: Maybe<Dashboard>;
   feedback?: Maybe<Feedback>;
-  getSprints: GetSprintsResponse;
-  meetingPrep?: Maybe<MeetingPrep>;
   peopleByCurrentUser?: Maybe<Array<Person>>;
   person?: Maybe<Person>;
   personGoal?: Maybe<PersonGoal>;
   personNote?: Maybe<PersonNote>;
-  recentTeamInsight: TeamInsight;
   role?: Maybe<Role>;
   rolesByCurrentUser?: Maybe<Array<Role>>;
   team?: Maybe<Team>;
@@ -673,11 +503,6 @@ export type QueryFeedbackArgs = {
 };
 
 
-export type QueryMeetingPrepArgs = {
-  input: MeetingPrepInput;
-};
-
-
 export type QueryPersonArgs = {
   input: PersonInput;
 };
@@ -693,11 +518,6 @@ export type QueryPersonNoteArgs = {
 };
 
 
-export type QueryRecentTeamInsightArgs = {
-  input: RecentTeamInsightInput;
-};
-
-
 export type QueryRoleArgs = {
   input: RoleInput;
 };
@@ -705,10 +525,6 @@ export type QueryRoleArgs = {
 
 export type QueryTeamArgs = {
   input: TeamInput;
-};
-
-export type RecentTeamInsightInput = {
-  teamId: Scalars['String'];
 };
 
 export type RegisterInput = {
@@ -723,13 +539,6 @@ export type RegisterResponse = {
   token?: Maybe<Scalars['String']>;
 };
 
-export type Repository = {
-  __typename?: 'Repository';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  url: Scalars['String'];
-};
-
 export type Role = {
   __typename?: 'Role';
   _id: Scalars['String'];
@@ -741,114 +550,17 @@ export type RoleInput = {
   roleId: Scalars['String'];
 };
 
-export type Sprint = {
-  __typename?: 'Sprint';
-  boardId: Scalars['Int'];
-  codeReviewCycleTime?: Maybe<Scalars['Float']>;
-  completeDate?: Maybe<Scalars['DateTime']>;
-  contributions: Array<SprintContribution>;
-  devCycleTime?: Maybe<Scalars['Float']>;
-  endDate?: Maybe<Scalars['DateTime']>;
-  goal?: Maybe<Scalars['String']>;
-  id: Scalars['Int'];
-  issues: Array<SprintIssue>;
-  name: Scalars['String'];
-  qaCycleTime?: Maybe<Scalars['Float']>;
-  readyForQACycleTime?: Maybe<Scalars['Float']>;
-  startDate: Scalars['DateTime'];
-  state?: Maybe<Scalars['String']>;
-};
-
-export type SprintContribution = {
-  __typename?: 'SprintContribution';
-  averageCycleTime?: Maybe<Scalars['Float']>;
-  issueCount?: Maybe<Scalars['Int']>;
-  person?: Maybe<Person>;
-  personId?: Maybe<Scalars['String']>;
-  storyPoints?: Maybe<Scalars['Int']>;
-};
-
-export type SprintIssue = {
-  __typename?: 'SprintIssue';
-  codeReviewCycleTime?: Maybe<Scalars['Float']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  cycleTime?: Maybe<Scalars['Float']>;
-  devCycleTime?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['String']>;
-  key?: Maybe<Scalars['String']>;
-  person?: Maybe<Person>;
-  personId?: Maybe<Scalars['String']>;
-  qaCycleTime?: Maybe<Scalars['Float']>;
-  readyForQACycleTime?: Maybe<Scalars['Float']>;
-  resolvedAt?: Maybe<Scalars['DateTime']>;
-  status?: Maybe<Scalars['String']>;
-  storyPoints?: Maybe<Scalars['Int']>;
-  timeInStatuses: Array<SprintIssueTimeInStatus>;
-};
-
-export type SprintIssueTimeInStatus = {
-  __typename?: 'SprintIssueTimeInStatus';
-  status?: Maybe<Scalars['String']>;
-  timeInStatus?: Maybe<Scalars['Float']>;
-};
-
 export type Team = {
   __typename?: 'Team';
   _id: Scalars['String'];
   createdAt: Scalars['DateTime'];
   name: Scalars['String'];
   people?: Maybe<Array<Person>>;
-  performance?: Maybe<TeamPerformance>;
   profileImageSrc?: Maybe<Scalars['String']>;
 };
 
 export type TeamInput = {
   teamId: Scalars['String'];
-};
-
-export type TeamInsight = {
-  __typename?: 'TeamInsight';
-  _id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  individualLevelReport: Array<TeamInsightIndividualLevelReport>;
-  issueAnomaliesReport: Array<TeamInsightIssueAnomalyReport>;
-  observationsReport: Array<Scalars['String']>;
-  teamId: Scalars['String'];
-  teamLevelReport: Array<TeamInsightTeamLevelReport>;
-};
-
-export type TeamInsightIndividualLevelReport = {
-  __typename?: 'TeamInsightIndividualLevelReport';
-  person?: Maybe<Person>;
-  personId?: Maybe<Scalars['String']>;
-  score?: Maybe<Scalars['Int']>;
-  summary?: Maybe<Scalars['String']>;
-};
-
-export type TeamInsightIssueAnomalyReport = {
-  __typename?: 'TeamInsightIssueAnomalyReport';
-  issueId?: Maybe<Scalars['String']>;
-  severity?: Maybe<Scalars['Int']>;
-  summary?: Maybe<Scalars['String']>;
-};
-
-export type TeamInsightTeamLevelReport = {
-  __typename?: 'TeamInsightTeamLevelReport';
-  score?: Maybe<Scalars['Int']>;
-  sprintId?: Maybe<Scalars['Int']>;
-  summary?: Maybe<Scalars['String']>;
-};
-
-export type TeamPerformance = {
-  __typename?: 'TeamPerformance';
-  individualPerformance: Array<PersonPerformance>;
-  recentIssuesBySprint: Array<Sprint>;
-};
-
-export type TimeInColumn = {
-  __typename?: 'TimeInColumn';
-  columnName?: Maybe<Scalars['String']>;
-  elapsedTime?: Maybe<Scalars['Float']>;
 };
 
 export type UncompleteUserTodoInput = {
@@ -862,23 +574,6 @@ export type UncompleteUserTodoResponse = {
   todo?: Maybe<UserTodo>;
 };
 
-export type UpdateCurrentUserInput = {
-  email?: InputMaybe<Scalars['String']>;
-  githubOrganization?: InputMaybe<Scalars['String']>;
-  githubToken?: InputMaybe<Scalars['String']>;
-  jiraEmail?: InputMaybe<Scalars['String']>;
-  jiraHost?: InputMaybe<Scalars['String']>;
-  jiraToken?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-};
-
-export type UpdateCurrentUserResponse = {
-  __typename?: 'UpdateCurrentUserResponse';
-  currentUser?: Maybe<CurrentUser>;
-  error?: Maybe<Scalars['String']>;
-  success: Scalars['Boolean'];
-};
-
 export type UpdateFeedbackInput = {
   content: Scalars['String'];
   feedbackId: Scalars['String'];
@@ -889,12 +584,6 @@ export type UpdateFeedbackResponse = {
   __typename?: 'UpdateFeedbackResponse';
   error?: Maybe<Scalars['String']>;
   feedback?: Maybe<Feedback>;
-  success: Scalars['Boolean'];
-};
-
-export type UpdateGithubDataResponse = {
-  __typename?: 'UpdateGithubDataResponse';
-  error?: Maybe<Scalars['String']>;
   success: Scalars['Boolean'];
 };
 
@@ -913,7 +602,6 @@ export type UpdatePersonGoalResponse = {
 
 export type UpdatePersonInput = {
   firstName?: InputMaybe<Scalars['String']>;
-  githubHandle?: InputMaybe<Scalars['String']>;
   kids?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   partners?: InputMaybe<Scalars['String']>;
@@ -976,20 +664,6 @@ export type UserTodo = {
   content: Scalars['String'];
   createdAt: Scalars['DateTime'];
 };
-
-export type _Service = {
-  __typename?: '_Service';
-  sdl?: Maybe<Scalars['String']>;
-};
-
-export type IssuePartsFragment = { __typename?: 'Issue', id: string, key: string, self?: string | null, assigneeName?: string | null, cycleTime?: number | null, cycleTimePerPoint?: number | null, endedAt?: any | null, personId?: string | null, startedAt?: any | null, storyPoints?: number | null, timesInColumns: Array<{ __typename?: 'TimeInColumn', columnName?: string | null, elapsedTime?: number | null }> };
-
-export type AddMeetingPrepTopicMutationVariables = Exact<{
-  input: AddMeetingPrepTopicInput;
-}>;
-
-
-export type AddMeetingPrepTopicMutation = { __typename?: 'Mutation', addMeetingPrepTopic?: { __typename?: 'AddMeetingPrepTopicResponse', error?: string | null, success: boolean, meetingPrep?: { __typename?: 'MeetingPrep', _id: string, topics: Array<string> } | null } | null };
 
 export type CompleteUserTodoMutationVariables = Exact<{
   input: CompleteUserTodoInput;
@@ -1103,13 +777,6 @@ export type DeleteTeamMutationVariables = Exact<{
 
 export type DeleteTeamMutation = { __typename?: 'Mutation', deleteTeam: { __typename?: 'DeleteTeamResponse', error?: string | null, success: boolean } };
 
-export type GenerateTeamInsightMutationVariables = Exact<{
-  input: GenerateTeamInsightInput;
-}>;
-
-
-export type GenerateTeamInsightMutation = { __typename?: 'Mutation', generateTeamInsight: { __typename?: 'GenerateTeamInsightResponse', error?: string | null, success: boolean, teamInsight?: { __typename?: 'TeamInsight', observationsReport: Array<string>, teamLevelReport: Array<{ __typename?: 'TeamInsightTeamLevelReport', sprintId?: number | null, score?: number | null, summary?: string | null }>, individualLevelReport: Array<{ __typename?: 'TeamInsightIndividualLevelReport', personId?: string | null, score?: number | null, summary?: string | null, person?: { __typename?: 'Person', _id: string, firstName: string, lastName: string } | null }>, issueAnomaliesReport: Array<{ __typename?: 'TeamInsightIssueAnomalyReport', issueId?: string | null, severity?: number | null, summary?: string | null }> } | null } };
-
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1122,24 +789,12 @@ export type UncompleteUserTodoMutationVariables = Exact<{
 
 export type UncompleteUserTodoMutation = { __typename?: 'Mutation', uncompleteUserTodo: { __typename?: 'UncompleteUserTodoResponse', success: boolean, error?: string | null, todo?: { __typename?: 'UserTodo', _id: string, completedAt?: any | null } | null } };
 
-export type UpdateCurrentUserMutationVariables = Exact<{
-  input: UpdateCurrentUserInput;
-}>;
-
-
-export type UpdateCurrentUserMutation = { __typename?: 'Mutation', updateCurrentUser: { __typename?: 'UpdateCurrentUserResponse', error?: string | null, success: boolean, currentUser?: { __typename?: 'CurrentUser', _id: string, email?: string | null, phoneNumber?: string | null } | null } };
-
 export type UpdateFeedbackMutationVariables = Exact<{
   input: UpdateFeedbackInput;
 }>;
 
 
 export type UpdateFeedbackMutation = { __typename?: 'Mutation', updateFeedback: { __typename?: 'UpdateFeedbackResponse', error?: string | null, success: boolean, feedback?: { __typename?: 'Feedback', _id: string, content: string, type: string } | null } };
-
-export type UpdateGithubDataMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type UpdateGithubDataMutation = { __typename?: 'Mutation', updateGithubData: { __typename?: 'UpdateGithubDataResponse', success: boolean, error?: string | null } };
 
 export type UpdatePersonMutationVariables = Exact<{
   input: UpdatePersonInput;
@@ -1179,7 +834,7 @@ export type UpdateTeamMutation = { __typename?: 'Mutation', updateTeam: { __type
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { __typename?: 'Query', currentUser?: { __typename?: 'CurrentUser', _id: string, phoneNumber?: string | null, jiraEmail?: string | null, jiraHost?: string | null, hasJiraToken?: boolean | null, hasGithubToken?: boolean | null, githubOrganization?: string | null, jiraColumnGroups?: Array<{ __typename?: 'JiraColumnGroup', _id: string, name?: string | null } | null> | null, jiraColumns?: Array<{ __typename?: 'JiraColumn', _id: string, name?: string | null, first?: boolean | null, last?: boolean | null, jiraColumnGroup?: { __typename?: 'JiraColumnGroup', _id: string, name?: string | null } | null } | null> | null } | null };
+export type CurrentUserQuery = { __typename?: 'Query', currentUser?: { __typename?: 'CurrentUser', _id: string, email?: string | null, phoneNumber?: string | null } | null };
 
 export type DashboardQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1193,29 +848,17 @@ export type FeedbackQueryVariables = Exact<{
 
 export type FeedbackQuery = { __typename?: 'Query', feedback?: { __typename?: 'Feedback', _id: string, content: string, createdAt: any, type: string } | null };
 
-export type GetSprintsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetSprintsQuery = { __typename?: 'Query', getSprints: { __typename?: 'GetSprintsResponse', success: boolean, error?: string | null } };
-
-export type MeetingPrepQueryVariables = Exact<{
-  input: MeetingPrepInput;
-}>;
-
-
-export type MeetingPrepQuery = { __typename?: 'Query', meetingPrep?: { __typename?: 'MeetingPrep', _id: string, topics: Array<string> } | null };
-
 export type PeopleByCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PeopleByCurrentUserQuery = { __typename?: 'Query', peopleByCurrentUser?: Array<{ __typename?: 'Person', _id: string, firstName: string, lastName: string, profileImageSrc?: string | null, reportsToMe: boolean, githubData?: { __typename?: 'GithubData', githubScore?: { __typename?: 'GithubScore', total?: number | null, author?: number | null, reviewer?: number | null, prCount?: number | null, authorCount?: number | null, reviewerCount?: number | null, meaningfulReviewRatio?: number | null, balanceMultiplier?: number | null, totalDelta?: number | null, authorDelta?: number | null, reviewerDelta?: number | null, prScores?: Array<{ __typename?: 'PRScore', id: string, score?: number | null, role: string }> | null } | null } | null, role?: { __typename?: 'Role', _id: string, name: string } | null, team?: { __typename?: 'Team', _id: string, name: string } | null }> | null };
+export type PeopleByCurrentUserQuery = { __typename?: 'Query', peopleByCurrentUser?: Array<{ __typename?: 'Person', _id: string, firstName: string, lastName: string, profileImageSrc?: string | null, reportsToMe: boolean, role?: { __typename?: 'Role', _id: string, name: string } | null, team?: { __typename?: 'Team', _id: string, name: string } | null }> | null };
 
 export type PersonQueryVariables = Exact<{
   input: PersonInput;
 }>;
 
 
-export type PersonQuery = { __typename?: 'Query', person?: { __typename?: 'Person', _id: string, firstName: string, githubHandle?: string | null, kids?: string | null, lastName: string, partners?: string | null, pets?: string | null, profileImageSrc?: string | null, reportsToMe: boolean, checkIns?: Array<{ __typename?: 'CheckIn', _id: string, createdAt: any, weeklyConfidence: number, weeklyConfidenceReason?: string | null, weeklyGoal: string, meetingRequested: boolean, meetingRequestedReasons: Array<string> }> | null, currentIssues?: Array<{ __typename?: 'Issue', id: string, key: string, self?: string | null, assigneeName?: string | null, cycleTime?: number | null, cycleTimePerPoint?: number | null, endedAt?: any | null, personId?: string | null, startedAt?: any | null, storyPoints?: number | null, timesInColumns: Array<{ __typename?: 'TimeInColumn', columnName?: string | null, elapsedTime?: number | null }> }> | null, feedback?: Array<{ __typename?: 'Feedback', _id: string, content: string, createdAt: any, type: string }> | null, pastIssues?: Array<{ __typename?: 'Issue', id: string, key: string, self?: string | null, assigneeName?: string | null, cycleTime?: number | null, cycleTimePerPoint?: number | null, endedAt?: any | null, personId?: string | null, startedAt?: any | null, storyPoints?: number | null, timesInColumns: Array<{ __typename?: 'TimeInColumn', columnName?: string | null, elapsedTime?: number | null }> }> | null, personGoals?: Array<{ __typename?: 'PersonGoal', _id: string, content: string, createdAt: any, targetDate: any }> | null, personNotes?: Array<{ __typename?: 'PersonNote', _id: string, content: string, createdAt: any }> | null, githubData?: { __typename?: 'GithubData', pullRequests?: Array<{ __typename?: 'PullRequest', _id: string, githubId: string, role?: string | null, additions?: number | null, deletions?: number | null, createdAt: any, mergedAt?: any | null, permalink: string, reviewCommentCount?: number | null, title: string, repository: { __typename?: 'Repository', id: string, name: string, url: string } }> | null, githubScore?: { __typename?: 'GithubScore', total?: number | null, author?: number | null, reviewer?: number | null, prCount?: number | null, authorCount?: number | null, reviewerCount?: number | null, meaningfulReviewRatio?: number | null, balanceMultiplier?: number | null, totalDelta?: number | null, authorDelta?: number | null, reviewerDelta?: number | null, prScores?: Array<{ __typename?: 'PRScore', id: string, score?: number | null, role: string }> | null } | null } | null, role?: { __typename?: 'Role', _id: string, name: string } | null, team?: { __typename?: 'Team', _id: string, name: string } | null } | null };
+export type PersonQuery = { __typename?: 'Query', person?: { __typename?: 'Person', _id: string, firstName: string, kids?: string | null, lastName: string, partners?: string | null, pets?: string | null, profileImageSrc?: string | null, reportsToMe: boolean, checkIns?: Array<{ __typename?: 'CheckIn', _id: string, createdAt: any, weeklyConfidence: number, weeklyConfidenceReason?: string | null, weeklyGoal: string, meetingRequested: boolean, meetingRequestedReasons: Array<string> }> | null, feedback?: Array<{ __typename?: 'Feedback', _id: string, content: string, createdAt: any, type: string }> | null, personGoals?: Array<{ __typename?: 'PersonGoal', _id: string, content: string, createdAt: any, targetDate: any }> | null, personNotes?: Array<{ __typename?: 'PersonNote', _id: string, content: string, createdAt: any }> | null, role?: { __typename?: 'Role', _id: string, name: string } | null, team?: { __typename?: 'Team', _id: string, name: string } | null } | null };
 
 export type PersonGoalQueryVariables = Exact<{
   input: PersonGoalInput;
@@ -1231,13 +874,6 @@ export type PersonNoteQueryVariables = Exact<{
 
 export type PersonNoteQuery = { __typename?: 'Query', personNote?: { __typename?: 'PersonNote', _id: string, content: string, createdAt: any } | null };
 
-export type RecentTeamInsightQueryVariables = Exact<{
-  input: RecentTeamInsightInput;
-}>;
-
-
-export type RecentTeamInsightQuery = { __typename?: 'Query', recentTeamInsight: { __typename?: 'TeamInsight', observationsReport: Array<string>, teamLevelReport: Array<{ __typename?: 'TeamInsightTeamLevelReport', sprintId?: number | null, score?: number | null, summary?: string | null }>, individualLevelReport: Array<{ __typename?: 'TeamInsightIndividualLevelReport', personId?: string | null, score?: number | null, summary?: string | null, person?: { __typename?: 'Person', _id: string, firstName: string, lastName: string } | null }>, issueAnomaliesReport: Array<{ __typename?: 'TeamInsightIssueAnomalyReport', issueId?: string | null, severity?: number | null, summary?: string | null }> } };
-
 export type RolesByCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1248,7 +884,7 @@ export type TeamQueryVariables = Exact<{
 }>;
 
 
-export type TeamQuery = { __typename?: 'Query', team?: { __typename?: 'Team', _id: string, createdAt: any, name: string, profileImageSrc?: string | null, people?: Array<{ __typename?: 'Person', _id: string, firstName: string, lastName: string, profileImageSrc?: string | null, reportsToMe: boolean }> | null, performance?: { __typename?: 'TeamPerformance', individualPerformance: Array<{ __typename?: 'PersonPerformance', personId?: string | null, averageCycleTime?: number | null, averageDevCycleTime?: number | null, averageCycleTimePerStoryPoint?: number | null, averageDevCycleTimePerStoryPoint?: number | null }>, recentIssuesBySprint: Array<{ __typename?: 'Sprint', id: number, name: string, state?: string | null, boardId: number, goal?: string | null, startDate: any, endDate?: any | null, completeDate?: any | null, devCycleTime?: number | null, codeReviewCycleTime?: number | null, readyForQACycleTime?: number | null, qaCycleTime?: number | null, contributions: Array<{ __typename?: 'SprintContribution', personId?: string | null, storyPoints?: number | null, averageCycleTime?: number | null, issueCount?: number | null, person?: { __typename?: 'Person', _id: string, firstName: string, lastName: string } | null }>, issues: Array<{ __typename?: 'SprintIssue', id?: string | null, createdAt?: any | null, cycleTime?: number | null, devCycleTime?: number | null, codeReviewCycleTime?: number | null, readyForQACycleTime?: number | null, qaCycleTime?: number | null, key?: string | null, resolvedAt?: any | null, status?: string | null, storyPoints?: number | null, person?: { __typename?: 'Person', _id: string, firstName: string, lastName: string } | null, timeInStatuses: Array<{ __typename?: 'SprintIssueTimeInStatus', status?: string | null, timeInStatus?: number | null }> }> }> } | null } | null };
+export type TeamQuery = { __typename?: 'Query', team?: { __typename?: 'Team', _id: string, createdAt: any, name: string, profileImageSrc?: string | null, people?: Array<{ __typename?: 'Person', _id: string, firstName: string, lastName: string, profileImageSrc?: string | null, reportsToMe: boolean }> | null } | null };
 
 export type TeamsByCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1260,62 +896,7 @@ export type UserTodosByCurrentUserQueryVariables = Exact<{ [key: string]: never;
 
 export type UserTodosByCurrentUserQuery = { __typename?: 'Query', userTodosByCurrentUser: Array<{ __typename?: 'UserTodo', _id: string, content: string, createdAt: any, completedAt?: any | null }> };
 
-export const IssuePartsFragmentDoc = gql`
-    fragment IssueParts on Issue {
-  id
-  key
-  self
-  assigneeName
-  cycleTime
-  cycleTimePerPoint
-  endedAt
-  personId
-  startedAt
-  storyPoints
-  timesInColumns {
-    columnName
-    elapsedTime
-  }
-}
-    `;
-export const AddMeetingPrepTopicDocument = gql`
-    mutation AddMeetingPrepTopic($input: AddMeetingPrepTopicInput!) {
-  addMeetingPrepTopic(input: $input) {
-    error
-    meetingPrep {
-      _id
-      topics
-    }
-    success
-  }
-}
-    `;
-export type AddMeetingPrepTopicMutationFn = Apollo.MutationFunction<AddMeetingPrepTopicMutation, AddMeetingPrepTopicMutationVariables>;
 
-/**
- * __useAddMeetingPrepTopicMutation__
- *
- * To run a mutation, you first call `useAddMeetingPrepTopicMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAddMeetingPrepTopicMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [addMeetingPrepTopicMutation, { data, loading, error }] = useAddMeetingPrepTopicMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useAddMeetingPrepTopicMutation(baseOptions?: Apollo.MutationHookOptions<AddMeetingPrepTopicMutation, AddMeetingPrepTopicMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AddMeetingPrepTopicMutation, AddMeetingPrepTopicMutationVariables>(AddMeetingPrepTopicDocument, options);
-      }
-export type AddMeetingPrepTopicMutationHookResult = ReturnType<typeof useAddMeetingPrepTopicMutation>;
-export type AddMeetingPrepTopicMutationResult = Apollo.MutationResult<AddMeetingPrepTopicMutation>;
-export type AddMeetingPrepTopicMutationOptions = Apollo.BaseMutationOptions<AddMeetingPrepTopicMutation, AddMeetingPrepTopicMutationVariables>;
 export const CompleteUserTodoDocument = gql`
     mutation CompleteUserTodo($input: CompleteUserTodoInput!) {
   completeUserTodo(input: $input) {
@@ -1907,63 +1488,6 @@ export function useDeleteTeamMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteTeamMutationHookResult = ReturnType<typeof useDeleteTeamMutation>;
 export type DeleteTeamMutationResult = Apollo.MutationResult<DeleteTeamMutation>;
 export type DeleteTeamMutationOptions = Apollo.BaseMutationOptions<DeleteTeamMutation, DeleteTeamMutationVariables>;
-export const GenerateTeamInsightDocument = gql`
-    mutation GenerateTeamInsight($input: GenerateTeamInsightInput!) {
-  generateTeamInsight(input: $input) {
-    error
-    success
-    teamInsight {
-      teamLevelReport {
-        sprintId
-        score
-        summary
-      }
-      individualLevelReport {
-        personId
-        person {
-          _id
-          firstName
-          lastName
-        }
-        score
-        summary
-      }
-      issueAnomaliesReport {
-        issueId
-        severity
-        summary
-      }
-      observationsReport
-    }
-  }
-}
-    `;
-export type GenerateTeamInsightMutationFn = Apollo.MutationFunction<GenerateTeamInsightMutation, GenerateTeamInsightMutationVariables>;
-
-/**
- * __useGenerateTeamInsightMutation__
- *
- * To run a mutation, you first call `useGenerateTeamInsightMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useGenerateTeamInsightMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [generateTeamInsightMutation, { data, loading, error }] = useGenerateTeamInsightMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useGenerateTeamInsightMutation(baseOptions?: Apollo.MutationHookOptions<GenerateTeamInsightMutation, GenerateTeamInsightMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<GenerateTeamInsightMutation, GenerateTeamInsightMutationVariables>(GenerateTeamInsightDocument, options);
-      }
-export type GenerateTeamInsightMutationHookResult = ReturnType<typeof useGenerateTeamInsightMutation>;
-export type GenerateTeamInsightMutationResult = Apollo.MutationResult<GenerateTeamInsightMutation>;
-export type GenerateTeamInsightMutationOptions = Apollo.BaseMutationOptions<GenerateTeamInsightMutation, GenerateTeamInsightMutationVariables>;
 export const LogoutDocument = gql`
     mutation Logout {
   logout {
@@ -2035,45 +1559,6 @@ export function useUncompleteUserTodoMutation(baseOptions?: Apollo.MutationHookO
 export type UncompleteUserTodoMutationHookResult = ReturnType<typeof useUncompleteUserTodoMutation>;
 export type UncompleteUserTodoMutationResult = Apollo.MutationResult<UncompleteUserTodoMutation>;
 export type UncompleteUserTodoMutationOptions = Apollo.BaseMutationOptions<UncompleteUserTodoMutation, UncompleteUserTodoMutationVariables>;
-export const UpdateCurrentUserDocument = gql`
-    mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {
-  updateCurrentUser(input: $input) {
-    error
-    success
-    currentUser {
-      _id
-      email
-      phoneNumber
-    }
-  }
-}
-    `;
-export type UpdateCurrentUserMutationFn = Apollo.MutationFunction<UpdateCurrentUserMutation, UpdateCurrentUserMutationVariables>;
-
-/**
- * __useUpdateCurrentUserMutation__
- *
- * To run a mutation, you first call `useUpdateCurrentUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateCurrentUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateCurrentUserMutation, { data, loading, error }] = useUpdateCurrentUserMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useUpdateCurrentUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCurrentUserMutation, UpdateCurrentUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateCurrentUserMutation, UpdateCurrentUserMutationVariables>(UpdateCurrentUserDocument, options);
-      }
-export type UpdateCurrentUserMutationHookResult = ReturnType<typeof useUpdateCurrentUserMutation>;
-export type UpdateCurrentUserMutationResult = Apollo.MutationResult<UpdateCurrentUserMutation>;
-export type UpdateCurrentUserMutationOptions = Apollo.BaseMutationOptions<UpdateCurrentUserMutation, UpdateCurrentUserMutationVariables>;
 export const UpdateFeedbackDocument = gql`
     mutation UpdateFeedback($input: UpdateFeedbackInput!) {
   updateFeedback(input: $input) {
@@ -2113,39 +1598,6 @@ export function useUpdateFeedbackMutation(baseOptions?: Apollo.MutationHookOptio
 export type UpdateFeedbackMutationHookResult = ReturnType<typeof useUpdateFeedbackMutation>;
 export type UpdateFeedbackMutationResult = Apollo.MutationResult<UpdateFeedbackMutation>;
 export type UpdateFeedbackMutationOptions = Apollo.BaseMutationOptions<UpdateFeedbackMutation, UpdateFeedbackMutationVariables>;
-export const UpdateGithubDataDocument = gql`
-    mutation UpdateGithubData {
-  updateGithubData {
-    success
-    error
-  }
-}
-    `;
-export type UpdateGithubDataMutationFn = Apollo.MutationFunction<UpdateGithubDataMutation, UpdateGithubDataMutationVariables>;
-
-/**
- * __useUpdateGithubDataMutation__
- *
- * To run a mutation, you first call `useUpdateGithubDataMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateGithubDataMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateGithubDataMutation, { data, loading, error }] = useUpdateGithubDataMutation({
- *   variables: {
- *   },
- * });
- */
-export function useUpdateGithubDataMutation(baseOptions?: Apollo.MutationHookOptions<UpdateGithubDataMutation, UpdateGithubDataMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateGithubDataMutation, UpdateGithubDataMutationVariables>(UpdateGithubDataDocument, options);
-      }
-export type UpdateGithubDataMutationHookResult = ReturnType<typeof useUpdateGithubDataMutation>;
-export type UpdateGithubDataMutationResult = Apollo.MutationResult<UpdateGithubDataMutation>;
-export type UpdateGithubDataMutationOptions = Apollo.BaseMutationOptions<UpdateGithubDataMutation, UpdateGithubDataMutationVariables>;
 export const UpdatePersonDocument = gql`
     mutation UpdatePerson($input: UpdatePersonInput!) {
   updatePerson(input: $input) {
@@ -2355,26 +1807,8 @@ export const CurrentUserDocument = gql`
     query CurrentUser {
   currentUser {
     _id
+    email
     phoneNumber
-    jiraEmail
-    jiraHost
-    hasJiraToken
-    hasGithubToken
-    githubOrganization
-    jiraColumnGroups {
-      _id
-      name
-    }
-    jiraColumns {
-      _id
-      name
-      jiraColumnGroup {
-        _id
-        name
-      }
-      first
-      last
-    }
   }
 }
     `;
@@ -2483,102 +1917,11 @@ export function useFeedbackLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<F
 export type FeedbackQueryHookResult = ReturnType<typeof useFeedbackQuery>;
 export type FeedbackLazyQueryHookResult = ReturnType<typeof useFeedbackLazyQuery>;
 export type FeedbackQueryResult = Apollo.QueryResult<FeedbackQuery, FeedbackQueryVariables>;
-export const GetSprintsDocument = gql`
-    query GetSprints {
-  getSprints {
-    success
-    error
-  }
-}
-    `;
-
-/**
- * __useGetSprintsQuery__
- *
- * To run a query within a React component, call `useGetSprintsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetSprintsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetSprintsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetSprintsQuery(baseOptions?: Apollo.QueryHookOptions<GetSprintsQuery, GetSprintsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetSprintsQuery, GetSprintsQueryVariables>(GetSprintsDocument, options);
-      }
-export function useGetSprintsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSprintsQuery, GetSprintsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetSprintsQuery, GetSprintsQueryVariables>(GetSprintsDocument, options);
-        }
-export type GetSprintsQueryHookResult = ReturnType<typeof useGetSprintsQuery>;
-export type GetSprintsLazyQueryHookResult = ReturnType<typeof useGetSprintsLazyQuery>;
-export type GetSprintsQueryResult = Apollo.QueryResult<GetSprintsQuery, GetSprintsQueryVariables>;
-export const MeetingPrepDocument = gql`
-    query MeetingPrep($input: MeetingPrepInput!) {
-  meetingPrep(input: $input) {
-    _id
-    topics
-  }
-}
-    `;
-
-/**
- * __useMeetingPrepQuery__
- *
- * To run a query within a React component, call `useMeetingPrepQuery` and pass it any options that fit your needs.
- * When your component renders, `useMeetingPrepQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMeetingPrepQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useMeetingPrepQuery(baseOptions: Apollo.QueryHookOptions<MeetingPrepQuery, MeetingPrepQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MeetingPrepQuery, MeetingPrepQueryVariables>(MeetingPrepDocument, options);
-      }
-export function useMeetingPrepLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeetingPrepQuery, MeetingPrepQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MeetingPrepQuery, MeetingPrepQueryVariables>(MeetingPrepDocument, options);
-        }
-export type MeetingPrepQueryHookResult = ReturnType<typeof useMeetingPrepQuery>;
-export type MeetingPrepLazyQueryHookResult = ReturnType<typeof useMeetingPrepLazyQuery>;
-export type MeetingPrepQueryResult = Apollo.QueryResult<MeetingPrepQuery, MeetingPrepQueryVariables>;
 export const PeopleByCurrentUserDocument = gql`
     query PeopleByCurrentUser {
   peopleByCurrentUser {
     _id
     firstName
-    githubData {
-      githubScore {
-        total
-        author
-        reviewer
-        prCount
-        authorCount
-        reviewerCount
-        meaningfulReviewRatio
-        balanceMultiplier
-        prScores {
-          id
-          score
-          role
-        }
-        totalDelta
-        authorDelta
-        reviewerDelta
-      }
-    }
     lastName
     profileImageSrc
     reportsToMe
@@ -2634,22 +1977,15 @@ export const PersonDocument = gql`
       meetingRequested
       meetingRequestedReasons
     }
-    currentIssues {
-      ...IssueParts
-    }
     feedback {
       _id
       content
       createdAt
       type
     }
-    githubHandle
     kids
     lastName
     partners
-    pastIssues {
-      ...IssueParts
-    }
     pets
     profileImageSrc
     personGoals {
@@ -2663,43 +1999,6 @@ export const PersonDocument = gql`
       content
       createdAt
     }
-    githubData {
-      pullRequests {
-        _id
-        githubId
-        role
-        additions
-        deletions
-        createdAt
-        mergedAt
-        permalink
-        reviewCommentCount
-        repository {
-          id
-          name
-          url
-        }
-        title
-      }
-      githubScore {
-        total
-        author
-        reviewer
-        prCount
-        authorCount
-        reviewerCount
-        meaningfulReviewRatio
-        balanceMultiplier
-        prScores {
-          id
-          score
-          role
-        }
-        totalDelta
-        authorDelta
-        reviewerDelta
-      }
-    }
     reportsToMe
     role {
       _id
@@ -2711,7 +2010,7 @@ export const PersonDocument = gql`
     }
   }
 }
-    ${IssuePartsFragmentDoc}`;
+    `;
 
 /**
  * __usePersonQuery__
@@ -2815,61 +2114,6 @@ export function usePersonNoteLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type PersonNoteQueryHookResult = ReturnType<typeof usePersonNoteQuery>;
 export type PersonNoteLazyQueryHookResult = ReturnType<typeof usePersonNoteLazyQuery>;
 export type PersonNoteQueryResult = Apollo.QueryResult<PersonNoteQuery, PersonNoteQueryVariables>;
-export const RecentTeamInsightDocument = gql`
-    query RecentTeamInsight($input: RecentTeamInsightInput!) {
-  recentTeamInsight(input: $input) {
-    teamLevelReport {
-      sprintId
-      score
-      summary
-    }
-    individualLevelReport {
-      personId
-      person {
-        _id
-        firstName
-        lastName
-      }
-      score
-      summary
-    }
-    issueAnomaliesReport {
-      issueId
-      severity
-      summary
-    }
-    observationsReport
-  }
-}
-    `;
-
-/**
- * __useRecentTeamInsightQuery__
- *
- * To run a query within a React component, call `useRecentTeamInsightQuery` and pass it any options that fit your needs.
- * When your component renders, `useRecentTeamInsightQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useRecentTeamInsightQuery({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useRecentTeamInsightQuery(baseOptions: Apollo.QueryHookOptions<RecentTeamInsightQuery, RecentTeamInsightQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<RecentTeamInsightQuery, RecentTeamInsightQueryVariables>(RecentTeamInsightDocument, options);
-      }
-export function useRecentTeamInsightLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RecentTeamInsightQuery, RecentTeamInsightQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<RecentTeamInsightQuery, RecentTeamInsightQueryVariables>(RecentTeamInsightDocument, options);
-        }
-export type RecentTeamInsightQueryHookResult = ReturnType<typeof useRecentTeamInsightQuery>;
-export type RecentTeamInsightLazyQueryHookResult = ReturnType<typeof useRecentTeamInsightLazyQuery>;
-export type RecentTeamInsightQueryResult = Apollo.QueryResult<RecentTeamInsightQuery, RecentTeamInsightQueryVariables>;
 export const RolesByCurrentUserDocument = gql`
     query RolesByCurrentUser {
   rolesByCurrentUser {
@@ -2917,62 +2161,6 @@ export const TeamDocument = gql`
       lastName
       profileImageSrc
       reportsToMe
-    }
-    performance {
-      individualPerformance {
-        personId
-        averageCycleTime
-        averageDevCycleTime
-        averageCycleTimePerStoryPoint
-        averageDevCycleTimePerStoryPoint
-      }
-      recentIssuesBySprint {
-        id
-        contributions {
-          personId
-          person {
-            _id
-            firstName
-            lastName
-          }
-          storyPoints
-          averageCycleTime
-          issueCount
-        }
-        name
-        state
-        boardId
-        goal
-        startDate
-        endDate
-        completeDate
-        devCycleTime
-        codeReviewCycleTime
-        readyForQACycleTime
-        qaCycleTime
-        issues {
-          id
-          createdAt
-          cycleTime
-          devCycleTime
-          codeReviewCycleTime
-          readyForQACycleTime
-          qaCycleTime
-          key
-          person {
-            _id
-            firstName
-            lastName
-          }
-          resolvedAt
-          status
-          storyPoints
-          timeInStatuses {
-            status
-            timeInStatus
-          }
-        }
-      }
     }
     profileImageSrc
   }

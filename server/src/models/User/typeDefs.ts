@@ -28,59 +28,11 @@ const typeDefs = gql`
     error: String
   }
 
-  type JiraColumnGroup {
-    _id: String!
-    name: String
-  }
-
-  type JiraColumn {
-    _id: String!
-    name: String
-    jiraColumnGroupId: String
-    jiraColumnGroup: JiraColumnGroup
-    first: Boolean
-    last: Boolean
-  }
-
   type CurrentUser {
     _id: String!
     createdAt: DateTime
     email: String
     phoneNumber: String
-    jiraHost: String
-    jiraEmail: String
-    hasJiraToken: Boolean
-    hasGithubToken: Boolean
-    githubOrganization: String
-    jiraColumnGroups: [JiraColumnGroup]
-    jiraColumns: [JiraColumn]
-  }
-
-  input JiraColumnGroupInput {
-    name: String!
-  }
-
-  input JiraColumnInput {
-    name: String!
-    jiraColumnGroupId: String
-    first: Boolean
-    last: Boolean
-  }
-
-  input UpdateCurrentUserInput {
-    email: String
-    password: String
-    jiraHost: String
-    jiraEmail: String
-    jiraToken: String
-    githubToken: String
-    githubOrganization: String
-  }
-
-  type UpdateCurrentUserResponse {
-    success: Boolean!
-    currentUser: CurrentUser
-    error: String
   }
 
   type OutstandingMeetingReport {
@@ -95,17 +47,10 @@ const typeDefs = gql`
     outstandingMeetingReports: [OutstandingMeetingReport!]!
   }
 
-  type UpdateGithubDataResponse {
-    success: Boolean!
-    error: String
-  }
-
   extend type Mutation {
     login(input: LoginInput!): LoginResponse!
     register(input: RegisterInput!): RegisterResponse!
-    updateCurrentUser(input: UpdateCurrentUserInput!): UpdateCurrentUserResponse!
     logout: LogoutResponse!
-    updateGithubData: UpdateGithubDataResponse!
   }
 
   extend type Query {

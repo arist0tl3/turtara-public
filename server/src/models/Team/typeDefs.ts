@@ -1,73 +1,12 @@
 import { gql } from 'graphql-tag';
 
 const typeDefs = gql`
-  type SprintIssueTimeInStatus {
-    status: String
-    timeInStatus: Float
-  }
-
-  type SprintIssue {
-    id: String
-    createdAt: DateTime
-    cycleTime: Float
-    devCycleTime: Float
-    qaCycleTime: Float
-    codeReviewCycleTime: Float
-    readyForQACycleTime: Float
-    key: String
-    personId: String
-    person: Person
-    resolvedAt: DateTime
-    status: String
-    storyPoints: Int
-    timeInStatuses: [SprintIssueTimeInStatus!]!
-  }
-
-  type SprintContribution {
-    personId: String
-    person: Person
-    averageCycleTime: Float
-    storyPoints: Int
-    issueCount: Int
-  }
-
-  type Sprint {
-    id: Int!
-    contributions: [SprintContribution!]!
-    name: String!
-    state: String
-    boardId: Int!
-    goal: String
-    startDate: DateTime!
-    endDate: DateTime
-    completeDate: DateTime
-    issues: [SprintIssue!]!
-    devCycleTime: Float
-    qaCycleTime: Float
-    codeReviewCycleTime: Float
-    readyForQACycleTime: Float
-  }
-
-  type PersonPerformance {
-    personId: String
-    averageCycleTime: Float
-    averageDevCycleTime: Float
-    averageCycleTimePerStoryPoint: Float
-    averageDevCycleTimePerStoryPoint: Float
-  }
-
-  type TeamPerformance {
-    recentIssuesBySprint: [Sprint!]!
-    individualPerformance: [PersonPerformance!]!
-  }
-
   type Team {
     _id: String!
     createdAt: DateTime!
     name: String!
 
     people: [Person!]
-    performance: TeamPerformance
     profileImageSrc: String
   }
 

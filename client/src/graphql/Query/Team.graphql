@@ -10,62 +10,6 @@ query Team($input: TeamInput!) {
       profileImageSrc
       reportsToMe
     }
-    performance {
-      individualPerformance {
-        personId
-        averageCycleTime
-        averageDevCycleTime
-        averageCycleTimePerStoryPoint
-        averageDevCycleTimePerStoryPoint
-      }
-      recentIssuesBySprint {
-        id
-        contributions {
-          personId
-          person {
-            _id
-            firstName
-            lastName
-          }
-          storyPoints
-          averageCycleTime
-          issueCount
-        }
-        name
-        state
-        boardId
-        goal
-        startDate
-        endDate
-        completeDate
-        devCycleTime
-        codeReviewCycleTime
-        readyForQACycleTime
-        qaCycleTime
-        issues {
-          id
-          createdAt
-          cycleTime
-          devCycleTime
-          codeReviewCycleTime
-          readyForQACycleTime
-          qaCycleTime
-          key
-          person {
-            _id
-            firstName
-            lastName
-          }
-          resolvedAt
-          status
-          storyPoints
-          timeInStatuses {
-            status
-            timeInStatus
-          }
-        }
-      }
-    }
     profileImageSrc
   }
 }

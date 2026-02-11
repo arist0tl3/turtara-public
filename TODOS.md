@@ -5,10 +5,15 @@
 - Prefer converting items into GitHub issues with owner + target milestone.
 - Move completed entries to a changelog or `DONE` section.
 
+## DONE
+- [x] Remove legacy GitHub/Jira/OpenAI/Anthropic integration modules and UI surfaces.
+- [x] Simplify GraphQL schema to core CRUD entities (people, teams, roles, notes, goals, check-ins, feedback).
+- [x] Move GraphQL codegen to local schema files so generation does not depend on a running API.
+- [x] Remove unused `updateCurrentUser` integration-oriented mutation path.
+
 ## Next Up (P0)
-- [ ] Expand root `README.md` with complete setup instructions for `client` and `server`.
+- [ ] Frontend CRUD UX pass: improve create/edit/delete flows and empty/loading/error states for people/teams/roles.
 - [ ] Remove sensitive auth logging in `server/src/server/utils/getUser.ts` (`authHeader` and token are currently logged).
-- [ ] Require a strong `JWT_SECRET` and remove insecure fallback default in `server/src/models/AuthToken/model.ts`.
 - [ ] Add baseline backend tests for auth/login/rate-limit behavior.
 - [ ] Add baseline frontend tests for auth routing and dashboard load states.
 
@@ -18,10 +23,10 @@
 - [ ] Improve/define "Subjects" feature scope and UX.
 
 ## Reliability and Developer Experience (P1)
-- [ ] Add shared root docs for environment variables (server + client), including AI/Jira/GitHub integrations.
+- [ ] Add shared root docs for environment variables (server + client) and mark required vs optional values.
 - [ ] Clarify and validate dev scripts (`start-dev`, build, codegen) in docs.
 - [ ] Add CI pipeline for lint + typecheck + tests.
-- [ ] Add `.env.sample` coverage for all required server vars (`MONGO_URI`, `JWT_SECRET`, AI/API keys).
+- [ ] Add `.env.sample` coverage for all required server vars (`MONGO_URI`, `JWT_SECRET`).
 - [ ] Remove `// @ts-nocheck` in resolver paths where possible (start with `server/src/models/User/Query/dashboard.ts`).
 
 ## Architecture and Data (P2)
@@ -32,5 +37,4 @@
 
 ## Cleanup Candidates
 - [ ] Replace placeholder/template docs (`client/README.md`) with project-specific content.
-- [ ] Audit legacy/commented code in AI insight generator and remove dead paths.
 - [ ] Normalize TypeScript and ESLint versions across client/server where practical.

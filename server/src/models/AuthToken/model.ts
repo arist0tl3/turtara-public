@@ -2,9 +2,9 @@ import { Schema, model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
 
-const { JWT_SECRET } = process.env;
+const jwtSecret: string = process.env.JWT_SECRET || '';
 
-if (!JWT_SECRET) {
+if (!jwtSecret) {
   throw new Error('Missing JWT_SECRET environment variable');
 }
 
@@ -26,7 +26,7 @@ const authTokenSchema = new Schema<IAuthToken>({
 
 // Create a new auth token for a user
 export async function createAuthToken(userId: string): Promise<string> {
-  const token = jwt.sign({ userId }, JWT_SECRET, { expiresIn: '7d' });
+  const token = jwt.sign({ userId }, jwtSecret, { expiresIn: '7d' });
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
   await AuthToken.create({
@@ -41,7 +41,9 @@ export async function createAuthToken(userId: string): Promise<string> {
 // Verify a token and return the userId if valid
 export async function verifyAuthToken(token: string): Promise<string | null> {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
+    const decoded = jwt.verify(token, jwtSecret);
+    const userId = typeof decoded === 'string' ? null : decoded.userId;
+    if (!userId) return null;
 
     // Find the token in the database
     const authToken = await AuthToken.findOne({
@@ -53,7 +55,7 @@ export async function verifyAuthToken(token: string): Promise<string | null> {
       return null;
     }
 
-    return decoded.userId;
+    return userId;
   } catch (error) {
     return null;
   }

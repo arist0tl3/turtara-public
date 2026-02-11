@@ -21,7 +21,6 @@ import NewRole from './components/pages/NewRole';
 import NewFeedback from './components/pages/NewFeedback';
 import Team from './components/pages/Team';
 import Layout from './components/Layout/Layout';
-import Config from './components/pages/Config/Config';
 
 export const CurrentUserContext = createContext<CurrentUser | null>(null);
 
@@ -75,8 +74,6 @@ function App() {
 
                 <Route path={'/teams/new'} element={<NewTeam />} />
                 <Route path={'/teams/:teamId'} element={<Team />} />
-
-                <Route path={'/config'} element={<Config />} />
 
                 <Route path="/login" element={<Navigate to="/" replace />} />
                 <Route path="/register" element={<Navigate to="/" replace />} />

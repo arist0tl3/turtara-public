@@ -1,38 +1,6 @@
 import { gql } from 'graphql-tag';
 
 const typeDefs = gql`
-  type Repository {
-    id: String!
-    name: String!
-    url: String!
-  }
-
-  type PRScore {
-    id: String!
-    score: Float
-    role: String!
-  }
-
-  type GithubScore {
-    total: Float
-    author: Float
-    reviewer: Float
-    prCount: Int
-    authorCount: Int
-    reviewerCount: Int
-    meaningfulReviewRatio: Float
-    balanceMultiplier: Float
-    prScores: [PRScore!]
-    totalDelta: Float
-    authorDelta: Float
-    reviewerDelta: Float
-  }
-
-  type GithubData {
-    pullRequests: [PullRequest!]
-    githubScore: GithubScore
-  }
-
   type Person {
     _id: String!
     firstName: String!
@@ -45,9 +13,6 @@ const typeDefs = gql`
     personNotes: [PersonNote!]
     personGoals: [PersonGoal!]
 
-    currentIssues: [Issue!]
-    pastIssues: [Issue!]
-
     feedback: [Feedback!]
 
     teamId: String
@@ -55,9 +20,6 @@ const typeDefs = gql`
 
     roleId: String
     role: Role
-
-    githubHandle: String
-    githubData: GithubData
 
     reportsToMe: Boolean!
 
@@ -69,7 +31,6 @@ const typeDefs = gql`
     lastName: String!
     teamId: ID
     roleId: ID
-    githubHandle: String
     reportsToMe: Boolean
   }
 
@@ -88,7 +49,6 @@ const typeDefs = gql`
     kids: String
     profileImageSrc: String
     teamId: String
-    githubHandle: String
     roleId: String
     reportsToMe: Boolean
   }
