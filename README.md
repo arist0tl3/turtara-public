@@ -1,12 +1,11 @@
 # Engineering Manager Dashboard
 
-People Manager is a full-stack web app for engineering managers to track people, teams, one-on-ones, goals, feedback, and operational signals from GitHub and Jira.
+People Manager is a full-stack web app for engineering managers to track people, teams, one-on-ones, goals, feedback, and check-ins.
 
 ## Stack
 - Client: React 18, TypeScript, Vite, Apollo Client, MUI Joy/Material
 - Server: Node.js, TypeScript, Apollo Server, Express middleware, Mongoose
 - Data: MongoDB
-- Integrations: GitHub GraphQL, Jira API, Anthropic/OpenAI-backed team insight generation
 
 ## Repository Structure
 - `client/`: frontend app
@@ -26,8 +25,6 @@ People Manager is a full-stack web app for engineering managers to track people,
 - `JWT_SECRET`: secret used for auth token signing/verification (required)
 - `PORT`: API port (optional, defaults to `4000`)
 - `NODE_ENV`: `development` or `production` (optional)
-- `CLAUDE_API_KEY`: Anthropic key for team insight generation (required for that feature)
-- `OPENAI_API_KEY`: OpenAI key if enabling OpenAI-based paths
 
 ### Client (`client/.env.development`)
 - `VITE_GRAPHQL_ENDPOINT`: GraphQL endpoint URL (example: `http://localhost:4000/`)
@@ -83,6 +80,7 @@ When GraphQL operations or schema types change:
 cd client
 npm run generate
 ```
+This project uses local schema files for codegen (`client/src/graphql/schema-base.graphql` + `server/src/models/**/typeDefs.ts`), so a running API is not required.
 3. Commit generated updates in:
 - `client/src/generated.ts`
 - `server/src/generated.ts`
@@ -90,7 +88,6 @@ npm run generate
 ## Current Project Status
 - Core CRUD for people, teams, roles, notes, goals, check-ins, and feedback exists.
 - Dashboard and reporting flows are implemented.
-- Integrations for GitHub/Jira and AI insights are present but need better operational documentation.
 - Root documentation and test coverage are still early-stage and being improved.
 
 ## Security Notes

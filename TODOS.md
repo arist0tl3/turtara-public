@@ -18,7 +18,7 @@
 - [ ] Improve/define "Subjects" feature scope and UX.
 
 ## Reliability and Developer Experience (P1)
-- [ ] Add shared root docs for environment variables (server + client), including AI/Jira/GitHub integrations.
+- [ ] Add shared root docs for environment variables (server + client) and mark required vs optional values.
 - [ ] Clarify and validate dev scripts (`start-dev`, build, codegen) in docs.
 - [ ] Add CI pipeline for lint + typecheck + tests.
 - [ ] Add `.env.sample` coverage for all required server vars (`MONGO_URI`, `JWT_SECRET`, AI/API keys).
@@ -32,5 +32,4 @@
 
 ## Cleanup Candidates
 - [ ] Replace placeholder/template docs (`client/README.md`) with project-specific content.
-- [ ] Audit legacy/commented code in AI insight generator and remove dead paths.
 - [ ] Normalize TypeScript and ESLint versions across client/server where practical.
