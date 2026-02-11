@@ -21,8 +21,6 @@ const typeDefs = gql`
     roleId: String
     role: Role
 
-    githubHandle: String
-
     reportsToMe: Boolean!
 
     checkIns: [CheckIn!]
@@ -33,7 +31,6 @@ const typeDefs = gql`
     lastName: String!
     teamId: ID
     roleId: ID
-    githubHandle: String
     reportsToMe: Boolean
   }
 
@@ -52,7 +49,6 @@ const typeDefs = gql`
     kids: String
     profileImageSrc: String
     teamId: String
-    githubHandle: String
     roleId: String
     reportsToMe: Boolean
   }

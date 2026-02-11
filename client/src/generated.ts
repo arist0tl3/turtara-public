@@ -91,7 +91,6 @@ export type CreatePersonGoalResponse = {
 
 export type CreatePersonInput = {
   firstName: Scalars['String'];
-  githubHandle?: InputMaybe<Scalars['String']>;
   lastName: Scalars['String'];
   reportsToMe?: InputMaybe<Scalars['Boolean']>;
   roleId?: InputMaybe<Scalars['ID']>;
@@ -474,7 +473,6 @@ export type Person = {
   checkIns?: Maybe<Array<CheckIn>>;
   feedback?: Maybe<Array<Feedback>>;
   firstName: Scalars['String'];
-  githubHandle?: Maybe<Scalars['String']>;
   kids?: Maybe<Scalars['String']>;
   lastName: Scalars['String'];
   partners?: Maybe<Scalars['String']>;
@@ -661,7 +659,6 @@ export type UpdatePersonGoalResponse = {
 
 export type UpdatePersonInput = {
   firstName?: InputMaybe<Scalars['String']>;
-  githubHandle?: InputMaybe<Scalars['String']>;
   kids?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   partners?: InputMaybe<Scalars['String']>;

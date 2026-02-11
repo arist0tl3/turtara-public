@@ -10,7 +10,6 @@ interface UpdatePersonUpdate {
   partners?: string;
   profileImageSrc?: string;
   teamId?: string;
-  githubHandle?: string;
   roleId?: string;
   reportsToMe?: boolean;
 }
