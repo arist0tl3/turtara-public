@@ -88,6 +88,7 @@ This project uses local schema files for codegen (`client/src/graphql/schema-bas
 ## Current Project Status
 - Core CRUD for people, teams, roles, notes, goals, check-ins, and feedback exists.
 - Dashboard and reporting flows are implemented.
+- Legacy GitHub/Jira/OpenAI/Anthropic integration code paths have been removed to simplify the baseline.
 - Root documentation and test coverage are still early-stage and being improved.
 
 ## Security Notes
@@ -97,8 +98,6 @@ This project uses local schema files for codegen (`client/src/graphql/schema-bas
 
 ## Near-Term Priorities
 See `TODOS.md` for prioritized work, including:
-- My Reports
-- Autosave notes
-- Subjects
+- Frontend CRUD UX polish for people/teams/roles/notes
 - Baseline test coverage and CI
 - Additional security and reliability hardening

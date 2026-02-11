@@ -35,17 +35,6 @@ const typeDefs = gql`
     phoneNumber: String
   }
 
-  input UpdateCurrentUserInput {
-    email: String
-    phoneNumber: String
-  }
-
-  type UpdateCurrentUserResponse {
-    success: Boolean!
-    currentUser: CurrentUser
-    error: String
-  }
-
   type OutstandingMeetingReport {
     _id: String!
     firstName: String!
@@ -61,7 +50,6 @@ const typeDefs = gql`
   extend type Mutation {
     login(input: LoginInput!): LoginResponse!
     register(input: RegisterInput!): RegisterResponse!
-    updateCurrentUser(input: UpdateCurrentUserInput!): UpdateCurrentUserResponse!
     logout: LogoutResponse!
   }
 

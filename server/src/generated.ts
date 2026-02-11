@@ -285,7 +285,6 @@ export type Mutation = {
   logout: LogoutResponse;
   register: RegisterResponse;
   uncompleteUserTodo: UncompleteUserTodoResponse;
-  updateCurrentUser: UpdateCurrentUserResponse;
   updateFeedback: UpdateFeedbackResponse;
   updatePerson: UpdatePersonResponse;
   updatePersonGoal: UpdatePersonGoalResponse;
@@ -387,11 +386,6 @@ export type MutationRegisterArgs = {
 
 export type MutationUncompleteUserTodoArgs = {
   input: UncompleteUserTodoInput;
-};
-
-
-export type MutationUpdateCurrentUserArgs = {
-  input: UpdateCurrentUserInput;
 };
 
 
@@ -578,18 +572,6 @@ export type UncompleteUserTodoResponse = {
   error?: Maybe<Scalars['String']>;
   success: Scalars['Boolean'];
   todo?: Maybe<UserTodo>;
-};
-
-export type UpdateCurrentUserInput = {
-  email?: InputMaybe<Scalars['String']>;
-  phoneNumber?: InputMaybe<Scalars['String']>;
-};
-
-export type UpdateCurrentUserResponse = {
-  __typename?: 'UpdateCurrentUserResponse';
-  currentUser?: Maybe<CurrentUser>;
-  error?: Maybe<Scalars['String']>;
-  success: Scalars['Boolean'];
 };
 
 export type UpdateFeedbackInput = {
@@ -806,13 +788,6 @@ export type UncompleteUserTodoMutationVariables = Exact<{
 
 
 export type UncompleteUserTodoMutation = { __typename?: 'Mutation', uncompleteUserTodo: { __typename?: 'UncompleteUserTodoResponse', success: boolean, error?: string | null, todo?: { __typename?: 'UserTodo', _id: string, completedAt?: any | null } | null } };
-
-export type UpdateCurrentUserMutationVariables = Exact<{
-  input: UpdateCurrentUserInput;
-}>;
-
-
-export type UpdateCurrentUserMutation = { __typename?: 'Mutation', updateCurrentUser: { __typename?: 'UpdateCurrentUserResponse', error?: string | null, success: boolean, currentUser?: { __typename?: 'CurrentUser', _id: string, email?: string | null, phoneNumber?: string | null } | null } };
 
 export type UpdateFeedbackMutationVariables = Exact<{
   input: UpdateFeedbackInput;
@@ -1584,45 +1559,6 @@ export function useUncompleteUserTodoMutation(baseOptions?: Apollo.MutationHookO
 export type UncompleteUserTodoMutationHookResult = ReturnType<typeof useUncompleteUserTodoMutation>;
 export type UncompleteUserTodoMutationResult = Apollo.MutationResult<UncompleteUserTodoMutation>;
 export type UncompleteUserTodoMutationOptions = Apollo.BaseMutationOptions<UncompleteUserTodoMutation, UncompleteUserTodoMutationVariables>;
-export const UpdateCurrentUserDocument = gql`
-    mutation UpdateCurrentUser($input: UpdateCurrentUserInput!) {
-  updateCurrentUser(input: $input) {
-    error
-    success
-    currentUser {
-      _id
-      email
-      phoneNumber
-    }
-  }
-}
-    `;
-export type UpdateCurrentUserMutationFn = Apollo.MutationFunction<UpdateCurrentUserMutation, UpdateCurrentUserMutationVariables>;
-
-/**
- * __useUpdateCurrentUserMutation__
- *
- * To run a mutation, you first call `useUpdateCurrentUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateCurrentUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateCurrentUserMutation, { data, loading, error }] = useUpdateCurrentUserMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useUpdateCurrentUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCurrentUserMutation, UpdateCurrentUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateCurrentUserMutation, UpdateCurrentUserMutationVariables>(UpdateCurrentUserDocument, options);
-      }
-export type UpdateCurrentUserMutationHookResult = ReturnType<typeof useUpdateCurrentUserMutation>;
-export type UpdateCurrentUserMutationResult = Apollo.MutationResult<UpdateCurrentUserMutation>;
-export type UpdateCurrentUserMutationOptions = Apollo.BaseMutationOptions<UpdateCurrentUserMutation, UpdateCurrentUserMutationVariables>;
 export const UpdateFeedbackDocument = gql`
     mutation UpdateFeedback($input: UpdateFeedbackInput!) {
   updateFeedback(input: $input) {
