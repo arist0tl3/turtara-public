@@ -1,26 +1,12 @@
-import { Fragment, ReactElement, useState } from 'react';
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
-import { Button, Typography } from '@mui/joy';
-import { Tab, TabsList, TabPanel, Tabs } from '@mui/base';
+import { ReactElement } from 'react';
+import { useParams } from 'react-router-dom';
+import { Box, Card, CardContent, Grid, Typography } from '@mui/joy';
 import styled from 'styled-components';
-import Charts from './Charts';
 
-import { Issue, Team, TeamInsight, useGenerateTeamInsightMutation, useRecentTeamInsightQuery, useTeamQuery } from '../../../generated';
-
+import { useTeamQuery } from '../../../generated';
 import Avatar from '../../Avatar';
-import {
-  background,
-  primary,
-  secondary,
-  onPrimary,
-  onBackground,
-  onSecondary,
-  onSurface,
-  surface,
-  primaryVariant,
-} from '../../../theme/colors';
+import { background, primary, onPrimary } from '../../../theme/colors';
 import EditTeam from '../EditTeam';
-import TeamSprintTable from './TeamSprintTable';
 import formatName from '../../../utils/formatName';
 
 const HeaderWrapper = styled.div`
@@ -34,10 +20,6 @@ const DetailsWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-left: 16px;
-
-  a {
-    margin-left: 0px;
-  }
 `;
 
 const Container = styled.div`
@@ -57,106 +39,16 @@ const NewHeader = styled.div`
   min-height: 128px;
 `;
 
-const NewTabs = styled.div`
+const Content = styled.div`
   width: 100%;
   background: ${background};
-  display: flex;
-  flex-direction: column;
   height: calc(100% - 128px);
-
-  .base-Tabs-root {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .base-TabsList-root {
-    background: ${primary};
-    padding: 0 12px 0 166px;
-
-    > button {
-      cursor: pointer;
-      border: 0;
-      outline: 0;
-      background: ${primary};
-      color: ${onPrimary};
-      padding: 12px;
-      border-top-left-radius: 2px;
-      border-top-right-radius: 2px;
-    }
-  }
-
-  .base-TabPanel-root:not(.base-TabPanel-hidden) {
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    min-height: calc(100vh - 168px);
-  }
-
-  button.base-Tab-root.base--selected {
-    background: ${background};
-    color: ${onBackground};
-  }
-`;
-
-const Insights = styled.div`
-  padding: 16px;
-
-  * {
-    color: ${onBackground} !important;
-  }
-
-  p {
-    margin-bottom: 8px;
-  }
-`;
-
-const InsightsContent = styled.div`
-  width: 100%;
-  height: 100%;
+  padding: 16px 24px 24px;
   overflow: auto;
 `;
 
-const InsightsSection = styled.div`
-  width: 100%;
-  margin-bottom: 16px;
-`;
-
-const ChartsWrapper = styled.div`
-  width: 100%;
-  height: calc(100% - 32px);
-  margin: 16px 32px;
-  padding: 16px;
-  background: ${surface};
-  color: ${onSurface};
-  overflow-y: auto;
-
-  h2 {
-    margin-top: 16px;
-  }
-`;
-
 function TeamComponent(): ReactElement {
-  const navigate = useNavigate();
-
   const { teamId = '' } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [teamInsight, setTeamInsight] = useState<TeamInsight | undefined>(undefined);
-
-  const selectedTab = searchParams.get('selectedTab') || 'cycleTime';
-
-  const [generateTeamInsight] = useGenerateTeamInsightMutation({
-    onCompleted: (data) => {
-      if (!!data.generateTeamInsight.teamInsight) {
-        setTeamInsight(data.generateTeamInsight.teamInsight);
-      }
-    },
-    variables: {
-      input: {
-        teamId,
-      },
-    },
-  });
 
   const { data, error, loading } = useTeamQuery({
     fetchPolicy: 'network-only',
@@ -167,43 +59,12 @@ function TeamComponent(): ReactElement {
     },
   });
 
-  const {
-    data: recentTeamInsightData,
-    error: recentTeamInsightError,
-    loading: recentTeamInsightLoading,
-  } = useRecentTeamInsightQuery({
-    fetchPolicy: 'network-only',
-    onCompleted: (data) => {
-      if (data?.recentTeamInsight) {
-        setTeamInsight(data.recentTeamInsight);
-      }
-    },
-    variables: {
-      input: {
-        teamId,
-      },
-    },
-  });
-
-  if (loading || recentTeamInsightLoading) return <div></div>;
+  if (loading) return <div></div>;
 
   const team = data?.team;
-  const recentTeamInsight = recentTeamInsightData?.recentTeamInsight;
-
-  const recentIssuesBySprint = data?.team?.performance?.recentIssuesBySprint || [];
-
-  console.log('recentIssuesBySprint', recentIssuesBySprint);
-  console.log('teamInsight', teamInsight);
-
   if (error || !team) return <div>{`Error: ${error}`}</div>;
 
-  const teamMembers = team?.people || [];
-
-  const handleGenerateInsightClick = () => {
-    generateTeamInsight();
-  };
-
-  console.log('selectedTab', selectedTab);
+  const teamMembers = team.people || [];
 
   return (
     <Container>
@@ -217,80 +78,29 @@ function TeamComponent(): ReactElement {
           </DetailsWrapper>
         </HeaderWrapper>
       </NewHeader>
-      <NewTabs>
-        <Tabs
-          orientation={'horizontal'}
-          aria-label={'Placement indicator tabs'}
-          defaultValue={selectedTab}
-          value={selectedTab}
-          onChange={(e) => {
-            const selectedTab = (e?.target as HTMLElement)?.innerText?.toLowerCase();
-            if (selectedTab) {
-              setSearchParams({
-                selectedTab,
-              });
-            }
-          }}
-        >
-          <TabsList>
-            <Tab className={selectedTab === 'cycle time' ? 'active' : ''} value={'cycle time'}>
-              {'Cycle Time'}
-            </Tab>
-            <Tab className={selectedTab === 'insight' ? 'active' : ''} value={'insight'}>
-              {'Insight'}
-            </Tab>
-            <Tab className={selectedTab === 'contributions' ? 'active' : ''} value={'contributions'}>
-              {'Contributions'}
-            </Tab>
-            <Tab className={selectedTab === 'delivery & impact' ? 'active' : ''} value={'delivery & impact'}>
-              {'Delivery & Impact'}
-            </Tab>
-            <Tab className={selectedTab === 'details' ? 'active' : ''} value={'details'}>
-              {'Details'}
-            </Tab>
-          </TabsList>
 
-          <TabPanel value={'cycle time'}>
-            <ChartsWrapper>
-              <Charts data={recentIssuesBySprint} />
-            </ChartsWrapper>
-          </TabPanel>
-
-          <TabPanel value={'contributions'}>
-            <ChartsWrapper>
-              <TeamSprintTable recentIssuesBySprint={recentIssuesBySprint} teamMembers={teamMembers} />
-            </ChartsWrapper>
-          </TabPanel>
-
-          <TabPanel value={'insight'}>
-            <Insights>
-              <Button onClick={handleGenerateInsightClick}>{'Generate New Insight'}</Button>
-
-              {!!teamInsight && (
-                <InsightsContent>
-                  <InsightsSection>
-                    <Typography level={'h4'}>{'Individual Contributors'}</Typography>
-                    {teamInsight.individualLevelReport.map((report) => (
-                      <Fragment key={report.personId}>
-                        <Typography level={'title-md'}>{formatName(report.person)}</Typography>
-                        <Typography level={'body-md'}>{report.summary}</Typography>
-                      </Fragment>
-                    ))}
-                  </InsightsSection>
-
-                  <InsightsSection></InsightsSection>
-
-                  <InsightsSection></InsightsSection>
-                </InsightsContent>
-              )}
-            </Insights>
-          </TabPanel>
-
-          <TabPanel value={'details'}>
+      <Content>
+        <Grid container spacing={2}>
+          <Grid xs={12} md={5}>
+            <Card variant="plain">
+              <CardContent>
+                <Typography level="h4" sx={{ mb: 1 }}>
+                  Team Members
+                </Typography>
+                {teamMembers.length === 0 && <Typography level="body-sm">No team members yet.</Typography>}
+                {teamMembers.map((person) => (
+                  <Box key={person._id} sx={{ py: 0.75 }}>
+                    <Typography>{formatName(person)}</Typography>
+                  </Box>
+                ))}
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid xs={12} md={7}>
             <EditTeam />
-          </TabPanel>
-        </Tabs>
-      </NewTabs>
+          </Grid>
+        </Grid>
+      </Content>
     </Container>
   );
 }

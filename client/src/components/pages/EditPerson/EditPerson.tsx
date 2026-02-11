@@ -40,7 +40,6 @@ function EditPerson({ onSuccess }: EditPersonProps) {
   const [profileImageSrc, setProfileImageSrc] = useState<string>('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [teamId, setTeamId] = useState<string>('');
-  const [githubHandle, setGithubHandle] = useState<string>('');
   const [roleId, setRoleId] = useState<string>('');
   const [reportsToMe, setReportsToMe] = useState<boolean>(false);
 
@@ -56,7 +55,6 @@ function EditPerson({ onSuccess }: EditPersonProps) {
       if (data?.person) {
         setFirstName(data.person.firstName);
         setLastName(data.person.lastName);
-        setGithubHandle(data.person.githubHandle || '');
         setKids(data.person.kids || '');
         setPartners(data.person.partners || '');
         setPets(data.person.pets || '');
@@ -89,7 +87,6 @@ function EditPerson({ onSuccess }: EditPersonProps) {
         partners,
         profileImageSrc,
         teamId,
-        githubHandle,
         roleId,
         reportsToMe,
       },
@@ -132,7 +129,6 @@ function EditPerson({ onSuccess }: EditPersonProps) {
   const textFields = [
     { name: 'firstName', label: 'First Name', value: firstName, onChange: setFirstName },
     { name: 'lastName', label: 'Last Name', value: lastName, onChange: setLastName },
-    { name: 'githubHandle', label: 'Github Handle', value: githubHandle, onChange: setGithubHandle },
     { name: 'partners', label: 'Partners', value: partners, onChange: setPartners },
     { name: 'kids', label: 'Kids', value: kids, onChange: setKids },
     { name: 'pets', label: 'Pets', value: pets, onChange: setPets },

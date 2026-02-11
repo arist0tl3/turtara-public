@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
   Box,
-  Button,
   Modal,
   ModalDialog,
   ModalClose,
@@ -17,27 +16,19 @@ import {
 } from '@mui/joy';
 import AddIcon from '@mui/icons-material/Add';
 import { useTheme } from '../../../theme/ThemeProvider';
-import { useCreatePersonNoteMutation, useMeetingPrepQuery, usePersonQuery } from '../../../generated';
+import { useCreatePersonNoteMutation, usePersonQuery } from '../../../generated';
 import Avatar from '../../Avatar';
 import formatName from '../../../utils/formatName';
 import NewCheckInForm from './NewCheckInForm';
-import NewMeetingPrepTopicForm from './NewMeetingPrepTopicForm';
 import EditPerson from '../EditPerson';
 import { CheckInsTab, OneOnOneTab, FeedbackTab } from './tabs';
-import PullRequestStatsCard from './PullRequestStatsCard';
 
 export default function PersonComponent() {
   const { theme } = useTheme();
   const navigate = useNavigate();
   const { personId = '' } = useParams();
   const [showNewCheckInModal, setShowNewCheckInModal] = useState(false);
-  const [showAddTopicModal, setShowAddTopicModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-
-  const { data: meetingPrepData } = useMeetingPrepQuery({
-    fetchPolicy: 'network-only',
-    variables: { input: { personId } },
-  });
 
   const { data, error } = usePersonQuery({
     fetchPolicy: 'network-only',
@@ -45,9 +36,9 @@ export default function PersonComponent() {
   });
 
   const [createPersonNote] = useCreatePersonNoteMutation({
-    onCompleted: (data) => {
-      if (data.createPersonNote.personNote?._id) {
-        navigate(`/people/${personId}/notes/${data.createPersonNote.personNote._id}`);
+    onCompleted: (responseData) => {
+      if (responseData.createPersonNote.personNote?._id) {
+        navigate(`/people/${personId}/notes/${responseData.createPersonNote.personNote._id}`);
       }
     },
   });
@@ -57,13 +48,9 @@ export default function PersonComponent() {
 
   const personNotes = person.personNotes || [];
   const checkIns = person.checkIns || [];
-  const githubData = person.githubData || null;
-  const topics = meetingPrepData?.meetingPrep?.topics || [];
-  const hasTopics = topics.length > 0;
 
   const handleStartClick = () => {
-    const content = hasTopics ? '<ul>' + topics.map((topic) => `<li><p>${topic}</p></li>`).join('') + '</ul>' : ' ';
-    createPersonNote({ variables: { input: { content, personId } } });
+    createPersonNote({ variables: { input: { content: ' ', personId } } });
   };
 
   const cardStyle = {
@@ -116,7 +103,6 @@ export default function PersonComponent() {
           </MenuButton>
           <Menu>
             <MenuItem onClick={handleStartClick}>Start 1:1</MenuItem>
-            <MenuItem onClick={() => setShowAddTopicModal(true)}>Add 1:1 Topic</MenuItem>
             <MenuItem onClick={() => setShowNewCheckInModal(true)}>Add Check In</MenuItem>
             <MenuItem component={Link} to={`/people/${personId}/feedback/new`}>
               Add Feedback
@@ -128,17 +114,6 @@ export default function PersonComponent() {
 
       <Box sx={{ p: 2 }}>
         <Grid container spacing={2}>
-          {/* First Row */}
-          {/* Pull Request Stats Section */}
-          <Grid xs={12} md={6}>
-            <Card variant="plain" sx={cardStyle}>
-              <CardContent>
-                <PullRequestStatsCard githubData={githubData} />
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Recent Check-ins Section */}
           <Grid xs={12} md={6}>
             <Card variant="plain" sx={cardStyle}>
               <CardContent>
@@ -150,8 +125,6 @@ export default function PersonComponent() {
             </Card>
           </Grid>
 
-          {/* Second Row */}
-          {/* 1:1 Notes Section */}
           <Grid xs={12} md={6}>
             <Card variant="plain" sx={cardStyle}>
               <CardContent>
@@ -160,16 +133,15 @@ export default function PersonComponent() {
                 </Typography>
                 <OneOnOneTab
                   personId={personId}
-                  topics={topics}
+                  topics={[]}
                   personNotes={personNotes}
-                  onAddTopic={() => setShowAddTopicModal(true)}
+                  onAddTopic={() => {}}
                   onStartOneOnOne={handleStartClick}
                 />
               </CardContent>
             </Card>
           </Grid>
 
-          {/* Feedback Section */}
           <Grid xs={12} md={6}>
             <Card variant="plain" sx={cardStyle}>
               <CardContent>
@@ -183,7 +155,6 @@ export default function PersonComponent() {
         </Grid>
       </Box>
 
-      {/* Modals */}
       <Modal open={showNewCheckInModal} onClose={() => setShowNewCheckInModal(false)}>
         <ModalDialog
           sx={{
@@ -196,19 +167,6 @@ export default function PersonComponent() {
             Start of Week Check In
           </Typography>
           <NewCheckInForm personId={personId} onSuccess={() => setShowNewCheckInModal(false)} />
-        </ModalDialog>
-      </Modal>
-
-      <Modal open={showAddTopicModal} onClose={() => setShowAddTopicModal(false)}>
-        <ModalDialog
-          sx={{
-            bgcolor: theme.person.cardBackground,
-            color: theme.text.primary,
-          }}
-        >
-          <ModalClose />
-          <Typography level="h4">Add a topic</Typography>
-          <NewMeetingPrepTopicForm personId={personId} onSuccess={() => setShowAddTopicModal(false)} />
         </ModalDialog>
       </Modal>
 

@@ -26,7 +26,6 @@ export default function Settings() {
   const [roleValue, setRoleValue] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [githubHandle, setGithubHandle] = useState('');
   const [newTeamName, setNewTeamName] = useState('');
   const [newRoleName, setNewRoleName] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -67,7 +66,6 @@ export default function Settings() {
   const resetForm = () => {
     setFirstName('');
     setLastName('');
-    setGithubHandle('');
     setTeamValue('');
     setRoleValue('');
     setIsDirectReport(false);
@@ -105,7 +103,6 @@ export default function Settings() {
           input: {
             firstName: firstName.trim(),
             lastName: lastName.trim(),
-            githubHandle: githubHandle.trim() || undefined,
             teamId: teamValue || undefined,
             roleId: roleValue || undefined,
             reportsToMe: isDirectReport,
@@ -179,8 +176,8 @@ export default function Settings() {
               Start by adding your team members
             </Typography>
             <Typography sx={{ mb: 3, color: theme.text.secondary, maxWidth: '600px', mx: 'auto' }}>
-              To get the most out of this platform, start by adding people, teams, and roles. You'll be able to track performance, set
-              goals, and manage your team more effectively.
+              To get the most out of this platform, start by adding people, teams, and roles. You can then run regular check-ins, manage
+              goals, and keep one-on-ones organized.
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
               <Button
@@ -424,18 +421,6 @@ export default function Settings() {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
-              sx={{
-                bgcolor: theme.colors.inputBackground,
-                color: theme.text.primary,
-              }}
-            />
-          </FormControl>
-
-          <FormControl sx={{ mb: 2 }}>
-            <FormLabel sx={{ color: theme.text.secondary }}>GitHub Handle</FormLabel>
-            <Input
-              value={githubHandle}
-              onChange={(e) => setGithubHandle(e.target.value)}
               sx={{
                 bgcolor: theme.colors.inputBackground,
                 color: theme.text.primary,

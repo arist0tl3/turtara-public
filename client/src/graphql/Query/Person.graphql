@@ -11,22 +11,15 @@ query Person($input: PersonInput!) {
       meetingRequested
       meetingRequestedReasons
     }
-    currentIssues {
-      ...IssueParts
-    }
     feedback {
       _id
       content
       createdAt
       type
     }
-    githubHandle
     kids
     lastName
     partners
-    pastIssues {
-      ...IssueParts
-    }
     pets
     profileImageSrc
     personGoals {
@@ -39,43 +32,6 @@ query Person($input: PersonInput!) {
       _id
       content
       createdAt
-    }
-    githubData {
-      pullRequests {
-        _id
-        githubId
-        role
-        additions
-        deletions
-        createdAt
-        mergedAt
-        permalink
-        reviewCommentCount
-        repository {
-          id
-          name
-          url
-        }
-        title
-      }
-      githubScore {
-        total
-        author
-        reviewer
-        prCount
-        authorCount
-        reviewerCount
-        meaningfulReviewRatio
-        balanceMultiplier
-        prScores {
-          id
-          score
-          role
-        }
-        totalDelta
-        authorDelta
-        reviewerDelta
-      }
     }
     reportsToMe
     role {
